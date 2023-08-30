@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Inria Sans;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 400px;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .container h1 {
+      margin-top: 0;
+    }
+
+    .container input[type="text"],
+    .container input[type="password"],
+    .container input[type="email"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .container button {
+      background-color: #4caf50;
+      color: white;
+      padding: 14px 20px;
+      margin: 10px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .container button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Registration</h1>
+    <form method='POST'>
+        {% csrf_token %}
+      {{form}}
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    // JavaScript code can be added here for additional functionality
+  </script>
+</body>
+</html>
