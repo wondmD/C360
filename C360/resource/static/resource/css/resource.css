@@ -1,0 +1,121 @@
+body{
+    margin: 0px;
+    font-family: Inria Sans;
+    background-color: #000;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    
+}
+#eng{
+    color: #FFF;
+    font-family: Inria Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+    margin-right: 3px;
+}
+#app{
+    color: rgba(255, 255, 255, 0.50);
+    font-family: Inria Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+.fresh-con{
+    width : 96%;
+    margin: 2%;
+    background-color:rgba(217, 217, 217, 0.10);
+    
+    border-radius: 30px;
+    
+}
+h2{
+    color: #FFF;
+}
+.cources-con{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.course-con{
+    background-color: rgba(217, 217, 217, 0.50);
+    width: 18.25rem;
+    border-radius: 20px;
+    flex-shrink: 0;
+    margin: 20px;
+    height: 6rem;
+
+}
+#fresh-head{
+    color: #94D82D;
+    font-family: Inria Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 0px;
+}
+
+.c-name{
+    color: #FFF;
+    font-family: Inria Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.c-r-no{
+    color: #FFF;
+    font-family: Inria Sans;
+    font-size: 1.4rem;
+    font-weight:300;
+    margin-left: 10px;
+}
+.l-n-c{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: 5%;
+    height:40px;
+}
+small{
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 300;
+    
+}
+#icons{
+    height: 24px;
+    width: 24px;
+}
+.l-n-c-l, .l-n-c-c{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+#myDropdown{
+    width: 200px;
+    height: 60px;
+    background: transparent;
+    border-radius: 10px;
+    margin-left: 20px;
+    color: white;
+    font-family: Inria Sans;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+option{
+    color: #000;
+    font-family: Inria Sans;
+}

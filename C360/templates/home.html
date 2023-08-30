@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+        .container-home{
+            background-image: url("{% static 'images/books.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container-home">
+        
+        <div class="hero">
+            <div class="emoji">
+                <img src="{% static 'images/sademoji.png' %}" alt="sad emoji">
+            </div>
+            <div>
+                <p class="headtext">Are you struggling to get  recourses for the coerces given in ASTU? </p>
+            </div>
+        </div>
+        <div class="lower">
+            <div class="happy">
+                <h1>This app is here to help you to get: </h1>
+            </div>
+            <div class="ticks-cont">
+                <div class="ticks">
+                    <div class="tick">
+                        <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
+                        <div><h3>Resource</h3></div>
+                    </div>
+                    <div class="tick">
+                        <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
+                        <div><h3>Curriculum Information</h3></div>
+                    </div>
+                    <div class="tick">
+                        <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
+                        <div><h3>Support</h3></div>
+                    </div>
+                </div>
+                <div class="butn">
+                        <a href="#" class="btn"> <div class="btncont"><p class="txt">Get Resource</p></div> </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
+{% endblock %}
