@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from .models import myusers
-from .backends import myusersBackend
+from .backends import MyUserBackend
 # Create your views here.
 def index(request):
     page_user = request.user
@@ -20,12 +20,12 @@ def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('name')
         password = request.POST.get('pass')
-        authbackend = myusersBackend()
+        authbackend = MyUserBackend()
         user = authbackend.authenticate(request=request, username=username, password=password)
         if user is not None:
-            messages.success(request, "Login successful!")
             login(request, user)
             return redirect('resource')
+            
         else:
             messages.error(request, 'Invalid username or password')
     return render(request, 'main/login.html')

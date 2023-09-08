@@ -1,14 +1,20 @@
-from django.contrib.auth.backends import BaseBackend
-from .models import myusers
+from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth import get_user_model
 
-class myusersBackend(BaseBackend):
+User = get_user_model()
+
+class MyUserBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
-            user = myusers.objects.get(username=username)
-        except myusers.DoesNotExist:
+            user = User.objects.get(username=username)
+            if user.check_password(password):
+                user.backend = self.__class__.__module__ + '.' + self.__class__.__name__
+                return user
+        except User.DoesNotExist:
             return None
 
-        if user.check_password(password):
-            return user
-
-        return None
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None
