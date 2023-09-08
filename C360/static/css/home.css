@@ -3,6 +3,10 @@ body{
     color: aliceblue;
     
 }
+#link{
+    text-decoration: none;
+    color: #FFF;
+}
 .container-home{
     background-image: url("{% static 'images/books.jpg' %}");
     background-repeat: no-repeat;

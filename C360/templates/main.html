@@ -19,20 +19,26 @@
             </div>
             <div class="menus" id="menus">
                 <div class="menu">
-                    Home
+                    <a id="link" href="{% url 'home' %}">Home</a>
                 </div>
                 <div class="menu">
-                    Resource
+                    <a id="link" href="{% url 'resource' %}">Resource</a>
                 </div>
                 <div class="menu">
-                    Curriculum
+                    <a id="link" href="">Curriculum</a>
                 </div>
                 <div class="menu">
-                    About
+                    <a id="link" href="">About</a>
                 </div>
                 <div class="log">
-                    <div class="loginicon"><a href=""><img src="{% static 'images/login.png' %}" alt=""></a></div>
+                    {% if page_user %}
+                    {{page_user}}
+                    {{page_user.department.name}}
+                    <a href="{% url 'logout' %}">logout</a>
+                    {% else %}
+                    <div class="loginicon"><a href="{% url 'login' %}"><img src="{% static 'images/login.png' %}" alt=""></a></div>
                     <div class="logtext">login</div>
+                    {% endif %}
                 </div>
                 
             </div>

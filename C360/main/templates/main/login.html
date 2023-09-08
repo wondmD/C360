@@ -65,10 +65,15 @@
 <body>
   <div class="container">
     <h1>Login</h1>
-    <form>
-      <input type="text" placeholder="Username" required>
-      <input type="password" placeholder="Password" required>
+    {% for mesage in messages %}
+    <p>{{ mesage }}</p>
+    {% endfor %}
+    <form method="POST" action="">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Username" required>
+      <input type="password" name="pass" placeholder="Password" required>
       <button type="submit">Login</button>
+      <a href="{% url 'register' %}">Don't have one? Register</a>
     </form>
   </div>
 

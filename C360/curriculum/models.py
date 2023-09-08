@@ -39,10 +39,10 @@ class semister(models.Model):
         max_length=50,
         choices=semisterChoice,
         default = sem1)
-    cources = models.ManyToManyField(course)
-
+    courses = models.ManyToManyField(course)
     department_name = models.ForeignKey(department, on_delete=models.CASCADE)
     def __str__(self):
         return (self.year +' '+self.semister_number)
+
 
 

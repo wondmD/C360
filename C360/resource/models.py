@@ -14,6 +14,15 @@ class course(models.Model):
     resource= models.ManyToManyField(resource)
     crh = models.IntegerField()
     rating = models.IntegerField()
+    couree_type1 = "Mandatory"
+    course_type2 = 'Elective'
+    course_type3 = 'Free-Elective'
+    course_typechoice = [
+        (couree_type1, "Mandatory"),
+        (course_type2, 'Elective'),
+        (course_type3, 'Free-Elective')
+    ]
+    course_type = models.CharField(max_length=200, choices=course_typechoice,default=couree_type1)
     def __str__(self):
         return self.name
 

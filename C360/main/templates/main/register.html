@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Inria Sans;
-      background-color: #f2f2f2;
+      background-color: #000;
       margin: 0;
       padding: 0;
       display: flex;
@@ -62,11 +62,16 @@
 <body>
   <div class="container">
     <h1>Registration</h1>
-    <form method='POST'>
-        {% csrf_token %}
-      {{form}}
+    <form method='POST'  action="">
+      {% csrf_token %}  
+      {% for feilds in form %}
+        {{feilds.label}}
+        {{feilds}}
+      {% endfor %}
+      {{form.errors}}
       <button type="submit">Register</button>
     </form>
+    <a href="{% url 'login' %}">Already have one? Login</a>
   </div>
 
   <script>
