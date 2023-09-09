@@ -52,6 +52,8 @@ h2{
     height: 6rem;
 
 }
+
+
 #fresh-head{
     color: #94D82D;
     font-family: Inria Sans;
@@ -118,4 +120,25 @@ small{
 option{
     color: #000;
     font-family: Inria Sans;
+}
+.flash-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: bold;
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+    background-color: #28a745;
+}
+
+.success {
+    background-color: #28a745;
+}
+
+.error {
+    background-color: #dc3545;
 }

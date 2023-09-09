@@ -2,6 +2,14 @@ body{
     margin:0;
     padding: 0;
 }
+#Profile{
+    width: 50px;
+    height: 50px;
+}
+#link{
+    text-decoration: none;
+    color: #fff;
+}
 .nav-cont{
     color: #fff;
     font-family:Inria Sans;

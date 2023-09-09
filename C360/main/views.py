@@ -32,7 +32,7 @@ def login_page(request):
 
 def logoutuser(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')
 
 def register_page(request):
     form = CreateUserForm()

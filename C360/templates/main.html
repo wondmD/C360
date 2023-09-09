@@ -32,12 +32,16 @@
                 </div>
                 <div class="log">
                     {% if page_user %}
-                    {{page_user}}
-                    {{page_user.department.name}}
-                    <a href="{% url 'logout' %}">logout</a>
+                        {% if my_user.profile_pic %}
+                            <img style='widht:50px; height:50px;' src="{{ page_user.profile_pic.url }}" alt="Profile Picture">
+                        {% else %}
+                            <img style='widht:50px; height:50px;' src="{% static 'images/avatar.png' %}" alt="Default Profile Picture">
+                        {% endif %}
+                        <a href="{% url 'logout' %}">Logout</a>
+
                     {% else %}
                     <div class="loginicon"><a href="{% url 'login' %}"><img src="{% static 'images/login.png' %}" alt=""></a></div>
-                    <div class="logtext">login</div>
+                    <div class="logtext" id="link">login</div>
                     {% endif %}
                 </div>
                 

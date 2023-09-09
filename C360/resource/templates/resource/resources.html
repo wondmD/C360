@@ -10,14 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'resource/css/resource.css' %}">
   <title>Resources</title>
+  <script src="{% static 'resource/js/resource.js' %}"></script>
 </head>
 <body>
+  <div id="flash-message" class="flash-message">
+    {% for mesage in messages %}
+    <p id="flash-message-text">{{ mesage }}</p>
+    {% endfor %}
+</div>
   <div class="head">
     <a id="eng" href="">Engineering / </a><a id="app" href=""> Applied</a>
-   
-      {% for mesage in messages %}
-    <p class="su">{{ mesage }}</p>
-    {% endfor %}
+    
   </div>
 <!--freashman cources-->
   <div class="fresh-con">
