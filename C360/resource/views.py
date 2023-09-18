@@ -14,6 +14,7 @@ def resource(request):
     courses = course.objects.all()
     semisters= semister.objects.all()
     department = page_user.department
+    
     context = {'page_user':page_user, 'courses':courses, 'department':department, 'semisters':semisters}
     messages.success(request, 'You have successfully authenticated as '+ request.user.username)
     return render(request, 'resource/resources.html', context)

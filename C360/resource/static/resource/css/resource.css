@@ -9,6 +9,10 @@ body{
     margin: 20px;
     
 }
+.semister-head{
+    width: 100%;
+    color: #FFF;
+}
 #eng{
     color: #FFF;
     font-family: Inria Sans;
@@ -65,8 +69,6 @@ h2{
     height: 6rem;
 
 }
-
-
 #fresh-head{
     color: #94D82D;
     font-family: Inria Sans;
@@ -93,7 +95,7 @@ h2{
 .c-r-no{
     color: #FFF;
     font-family: Inria Sans;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight:300;
     margin-left: 10px;
 }

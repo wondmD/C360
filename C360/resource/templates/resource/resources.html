@@ -13,11 +13,6 @@
   <script src="{% static 'resource/js/resource.js' %}"></script>
 </head>
 <body>
-  <div id="flash-message" class="flash-message">
-    {% for mesage in messages %}
-    <p id="flash-message-text">{{ mesage }}</p>
-    {% endfor %}
-</div>
   <div class="head">
     <a id="eng" href="">Engineering / </a><a id="app" href=""> Applied</a>
     
@@ -34,13 +29,13 @@
           {% for cource in semister.courses.all %}
       <div class="course-con">
         
-            <div class="c-name"><a href="{% url 'course_detail' course_id=cource.id %}">{{cource.name}}</a> ({{cource.crh}}chrs)</div>
+            <div class="c-name"><a style="color: #fff; text-decoration: none;" href="{% url 'course_detail' course_id=cource.id %}">{{cource.name}}</a></div>
             
-            <div class="c-r-no">Resources({{cource.resource_count}})</div>
+            <div class="c-r-no">({{cource.crh}}chrs)---Resources({{cource.resource_count}})</div>
             <div class="l-n-c">
               <div class="l-n-c-l">
             
-                <div><a href="{% url 'increase_rating' course_id=cource.id %}"><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></a></div>
+                <div><a  href="{% url 'increase_rating' course_id=cource.id %}"><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></a></div>
                 <div><small> {{cource.rating}} likes</small></div>
                 
               </div>
@@ -60,94 +55,79 @@
   </div>
 <!--school cources-->
 <div class="head">
-  <a id="eng" href="">SOEEC / </a><a id="app" href=""> SOCEA /</a><a id="app" href=""> SOCME </a>
+  <a id="eng" href="">{{request.user.department.school}}</a>
 </div>
   <div class="fresh-con">
-    <h3 id="fresh-head">Shools
+    <h3 id="fresh-head">Schools Courses
     </h3>
     <div class="cources-con">
+      {% for semister in semisters %}
+        {% if semister.department.name == request.user.department.school %}
+          {% for cource in semister.courses.all %}
       <div class="course-con">
-        <div class="c-name">Applied math III</div>
-        <div class="c-r-no">Resources(3)</div>
-        <div class="l-n-c">
-          <div class="l-n-c-l">
+        <div class="c-name"><a style="color: #fff; text-decoration: none;" href="{% url 'course_detail' course_id=cource.id %}">{{cource.name}}</a></div>
             
-            <div><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></div>
-            <div><small> 5 likes</small></div>
+            <div class="c-r-no"> ({{cource.crh}}chrs)---Resources({{cource.resource_count}})</div>
+            <div class="l-n-c">
+              <div class="l-n-c-l">
             
-          </div>
-          <div class="l-n-c-c">
-            
-            <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
-            <div><small>6 comments</small></div>
-            
-          </div>
-        </div>
+                <div><a href="{% url 'increase_rating' course_id=cource.id %}"><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></a></div>
+                <div><small> {{cource.rating}} likes</small></div>
+                
+              </div>
+              <div class="l-n-c-c">
+                
+                <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
+                <div><small>{{course.comments}} comments</small></div>
+                
+              </div>
+            </div>
        
       </div>
-      <div class="course-con">
-        
-      </div>
-      <div class="course-con">
-        
-      </div>
-      <div class="course-con">
-        
-      </div>
-      <div class="course-con">
-        
-      </div>
+      {% endfor %}
+        {% endif %}
+       {% endfor %}
+     
     </div>
   </div>
   
   <!--department cources-->
   <div class="head">
-    <div><h2 id="eng">Select your Department</h2></div>
-    <div>
-      <select id="myDropdown" name="myDropdown">
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-      </select>
-    </div>
-
+    <div><h2 id="eng">{{request.user.department.name}}</h2></div>
   </div>
     <div class="fresh-con">
-      <h3 id="fresh-head">Department
-      </h3>
+      {% for semister in semisters %}
+        
+        {% if semister.department.name == request.user.department.name and semister.year != '1st year' %}
+        <h3 id="fresh-head">{{semister.year}}-{{semister.semister_number}}</h3>
       <div class="cources-con">
+          {% for cource in semister.courses.all %}
+        
         <div class="course-con">
-          <div class="c-name">Applied math III</div>
-          <div class="c-r-no">Resources(3)</div>
-          <div class="l-n-c">
-            <div class="l-n-c-l">
-              
-              <div><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></div>
-              <div><small> 5 likes</small></div>
-              
+          <div class="c-name"><a style="color: #fff; text-decoration: none;" href="{% url 'course_detail' course_id=cource.id %}">{{cource.name}}</a> </div>
+            
+            <div class="c-r-no">({{cource.crh}}chrs)---Resources({{cource.resource_count}})</div>
+            <div class="l-n-c">
+              <div class="l-n-c-l">
+            
+                <div><a href="{% url 'increase_rating' course_id=cource.id %}"><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></a></div>
+                <div><small> {{cource.rating}} likes</small></div>
+                
+              </div>
+              <div class="l-n-c-c">
+                
+                <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
+                <div><small>{{course.comments}} comments</small></div>
+                
+              </div>
             </div>
-            <div class="l-n-c-c">
-              
-              <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
-              <div><small>6 comments</small></div>
-              
-            </div>
-          </div>
-         
         </div>
-        <div class="course-con">
-          
-        </div>
-        <div class="course-con">
-          
-        </div>
-        <div class="course-con">
-          
-        </div>
-        <div class="course-con">
-          
-        </div>
+        {% endfor %}
+        
+        
       </div>
+      {% endif %}
+       {% endfor %}
     </div>
 </body>
 {% endblock %}

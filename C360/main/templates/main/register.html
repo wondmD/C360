@@ -62,7 +62,7 @@
 <body>
   <div class="container">
     <h1>Registration</h1>
-    <form method='POST'  action="">
+    <form method='POST'  action="" enctype="multipart/form-data">
       {% csrf_token %}  
       {% for feilds in form %}
         {{feilds.label}}

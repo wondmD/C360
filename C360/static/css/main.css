@@ -38,6 +38,9 @@ body{
     margin-top: 10px;
     margin-left: 10px;
     padding-bottom: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.8rem;
 }
 .loginicon{
     margin-bottom: 0px;

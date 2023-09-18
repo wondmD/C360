@@ -6,6 +6,25 @@ from resource.models import course
 # Create your models here.
 class department(models.Model):
     name = models.CharField(max_length=100)
+
+    SoANS='School of Applied Natural Sciences'
+    SoCEA='School of Civil Engineering and Architecture'
+    SoEEC='School of Electrical Engineering and Computing'
+    SoMCME='School of Mechanical, Chemical, and Materials Engineering'
+    none = 'none'
+
+    school_options=[
+        (SoANS,'School of Applied Natural Sciences'),
+        (SoCEA,'School of Civil Engineering and Architecture'),
+        (SoEEC,'School of Electrical Engineering and Computing'),
+        (SoMCME,'School of Mechanical, Chemical, and Materials Engineering'),
+        (none, 'none')
+    ]
+    school = models.CharField(
+        max_length=100,
+        choices=school_options,
+        default=none
+    )
     def __str__(self):
         return self.name
 class semister(models.Model):
@@ -40,9 +59,10 @@ class semister(models.Model):
         choices=semisterChoice,
         default = sem1)
     courses = models.ManyToManyField(course)
-    department_name = models.ForeignKey(department, on_delete=models.CASCADE)
+    department = models.ForeignKey('Department', on_delete=models.CASCADE, null=True)
     def __str__(self):
-        return (self.year +' '+self.semister_number)
+        return (self.department.name +" "+ self.year +' '+self.semister_number)
+
 
 
 
