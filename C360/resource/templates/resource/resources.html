@@ -27,37 +27,35 @@
 
     <h3 id="fresh-head">1st Year/Pre-Engineering</h3>
     <div class="cources-con">
-      <div class="course-con">
-        <div class="c-name">Applied math I</div>
-        <div class="c-r-no">Resources(3)</div>
-        <div class="l-n-c">
-          <div class="l-n-c-l">
-            
-            <div><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></div>
-            <div><small> 5 likes</small></div>
-            
-          </div>
-          <div class="l-n-c-c">
-            
-            <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
-            <div><small>6 comments</small></div>
-            
-          </div>
-        </div>
-       
-      </div>
+      
+      <!--course card start here -->
+      {% for semister in semisters %}
+        {% if semister.year == '1st year' %}
+          {% for cource in semister.courses.all %}
       <div class="course-con">
         
+            <div class="c-name"><a href="{% url 'course_detail' course_id=cource.id %}">{{cource.name}}</a> ({{cource.crh}}chrs)</div>
+            
+            <div class="c-r-no">Resources({{cource.resource_count}})</div>
+            <div class="l-n-c">
+              <div class="l-n-c-l">
+            
+                <div><a href="{% url 'increase_rating' course_id=cource.id %}"><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></a></div>
+                <div><small> {{cource.rating}} likes</small></div>
+                
+              </div>
+              <div class="l-n-c-c">
+                
+                <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
+                <div><small>{{course.comments}} comments</small></div>
+                
+              </div>
+            </div>
       </div>
-      <div class="course-con">
-        
-      </div>
-      <div class="course-con">
-        
-      </div>
-      <div class="course-con">
-        
-      </div>
+      {% endfor %}
+        {% endif %}
+       {% endfor %}
+    
     </div>
   </div>
 <!--school cources-->

@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from .models import myusers
 from .backends import MyUserBackend
+from django.contrib.auth.hashers import make_password
 # Create your views here.
 def index(request):
     page_user = request.user
@@ -40,12 +41,13 @@ def register_page(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            department = form.cleaned_data.get('department')
-
-            #messages.success(request, 'Regesterd as '+ username +department)
+            user = form.save(commit=False)
+            user.password = make_password(form.cleaned_data['password'])
+            user.save()
             return redirect('login')
 
     context = {'form':form}
     return render(request, 'main/register.html', context)
+
+def about(request):
+    return render(request, 'about.html')

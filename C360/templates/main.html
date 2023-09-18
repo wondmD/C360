@@ -28,14 +28,14 @@
                     <a id="link" href="">Curriculum</a>
                 </div>
                 <div class="menu">
-                    <a id="link" href="">About</a>
+                    <a id="link" href="{% url 'about' %}">About</a>
                 </div>
                 <div class="log">
                     {% if page_user %}
                         {% if my_user.profile_pic %}
-                            <img style='widht:50px; height:50px;' src="{{ page_user.profile_pic.url }}" alt="Profile Picture">
+                            <img style='width:50px; height:50px;' src="{{ page_user.profile_pic.url }}" alt="Profile Picture">
                         {% else %}
-                            <img style='widht:50px; height:50px;' src="{% static 'images/avatar.png' %}" alt="Default Profile Picture">
+                            <img style='width:50px; height:50px;' src="{% static 'images/avatar.png' %}" alt="Default Profile Picture">
                         {% endif %}
                         <a href="{% url 'logout' %}">Logout</a>
 
@@ -51,10 +51,10 @@
             </div>
         </div>
     </nav>
-    <section class="main">
+    
         {% block content %}
 
         {% endblock %}
-    </section>
+    
 </body>
 </html>

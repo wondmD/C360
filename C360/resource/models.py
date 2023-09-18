@@ -23,7 +23,17 @@ class course(models.Model):
         (course_type3, 'Free-Elective')
     ]
     course_type = models.CharField(max_length=200, choices=course_typechoice,default=couree_type1)
+
+    @property
+    def resource_count(self):
+        return self.resource.count()
+    
+    def increase_rating(self):
+        self.rating += 1
+        self.save()
+    
     def __str__(self):
         return self.name
+
 
 

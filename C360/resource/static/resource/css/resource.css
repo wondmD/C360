@@ -41,11 +41,24 @@ h2{
 }
 .cources-con{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+@media (max-width:1100px){
+    .cources-con{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:800px){
+    .cources-con{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
 }
 .course-con{
     background-color: rgba(217, 217, 217, 0.50);
-    width: 18.25rem;
+    width: 80%;
     border-radius: 20px;
     flex-shrink: 0;
     margin: 20px;
@@ -69,7 +82,7 @@ h2{
 .c-name{
     color: #FFF;
     font-family: Inria Sans;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -80,7 +93,7 @@ h2{
 .c-r-no{
     color: #FFF;
     font-family: Inria Sans;
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight:300;
     margin-left: 10px;
 }
@@ -90,10 +103,11 @@ h2{
     justify-content: space-between;
     width: 90%;
     margin-left: 5%;
+    margin-top: 3%;
     height:40px;
 }
 small{
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: white;
     font-weight: 300;
     

@@ -1,0 +1,42 @@
+<!-- template.html -->
+{% extends 'main.html' %}
+
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Detail</title>
+    <link rel="stylesheet" href="{% static 'resource/css/course_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+    
+    <h1>Course Detail</h1>
+        <div class="course-container-d">
+            <div class="course-name">{{ target_course.name }}</div>
+            <div class="course-description">{{ target_course.description }}</div>
+            <div class="course-type">Type: {{ target_course.get_course_type_display }}</div>
+            <div class="course-rating">Rating: {{ target_course.rating }}</div>
+            <div class="course-resource-count">Resources : {{ target_course.resource_count }}</div>
+            <div class="resource-section">
+                <h3>Resources</h3>
+                <ul>
+                {% for resource in target_course.resource.all %}
+                     <li>
+                        <a href="{{ resource.file.url }}" target="_blank">
+                            <img src="{% static 'resource/images/download.png' %}" alt="">
+                            Download {{ resource.name }}
+                        </a>
+                        <hr>
+                    </li>
+
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock content %}
