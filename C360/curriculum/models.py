@@ -3,6 +3,7 @@ from resource.models import course
 
 
 
+
 # Create your models here.
 class department(models.Model):
     name = models.CharField(max_length=100)
