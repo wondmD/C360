@@ -1,0 +1,216 @@
+/* Global Styles */
+body {
+  font-family: Inria sans;
+  background-color: #333;
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex; /* Added */
+}
+
+/* Room Styles */
+.room {
+  background-color: #444;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 30px;
+  flex-grow: 1; /* Added */
+}
+
+.room__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.room__topLeft h3 {
+  font-size: 24px;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.room__topRight svg {
+  width: 24px;
+  height: 24px;
+  fill: #999;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.room__topRight svg:hover {
+  fill: #ccc;
+}
+
+.room__box {
+  height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+.room__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.room__info h3 {
+  font-size: 20px;
+  color: #fff;
+}
+
+.room__info span {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.room__hosted p {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 5px;
+}
+
+.room__author {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.room__author span {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.room__topics {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.room__conversation {
+  height: 230px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.thread {
+  margin-bottom: 10px;
+}
+
+.thread__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.thread__author {
+  display: flex;
+  align-items: center;
+}
+
+.thread__authorInfo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.thread__authorInfo span {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.thread__date {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.thread__delete svg {
+  width: 16px;
+  height: 16px;
+  fill: #999;
+  cursor: pointer;
+}
+
+.thread__delete svg:hover {
+  fill: #ccc;
+}
+
+.thread__details {
+  font-size: 14px;
+}
+
+.room__message {
+  margin-top: 10px;
+}
+
+.room__message input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #555;
+}
+
+/* Participants Styles */
+.participants {
+  background-color: #555;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 30px;
+  width: 300px; /* Added */
+}
+
+.participants__top {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.participants__list {
+  height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.participant {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.participant p {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.participant span {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar--small {
+  width: 24px;
+  height: 24px;
+}
+

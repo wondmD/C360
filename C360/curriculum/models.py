@@ -24,7 +24,7 @@ class department(models.Model):
     school = models.CharField(
         max_length=100,
         choices=school_options,
-        default=none
+        default=SoEEC
     )
     def __str__(self):
         return self.name

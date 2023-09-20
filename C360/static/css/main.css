@@ -1,113 +1,273 @@
-body{
-    margin:0;
+/* Reset default margin and padding */
+* {
+    margin: 0;
     padding: 0;
-    height: 12vh;
-}
-#Profile{
-    width: 50px;
-    height: 50px;
+    box-sizing: border-box;
+    font-family: Inria Sans;
+  }
+#pic {
+    margin: auto;
+    border-radius: 50%;
 }
 #link{
-    text-decoration: none;
-    color: #fff;
-}
-.nav-cont{
-    color: #fff;
-    font-family:Inria Sans;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    width: 100%;
-    height: 12vh;
-    background-color: #25252F;
-}
-.menus{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-.log{
-    display: grid;
-    grid-template-rows: 5fr 1fr;
-    height: 10vh;
-    margin-top: 10px;
+  color: #94D82D;
 }
 .logtext{
-    margin-top: 10px;
-    margin-left: 10px;
-    padding-bottom: 10px;
-    text-decoration: none;
-    color: #fff;
-    font-size: 0.8rem;
+    margin-top: 5%;
 }
-.loginicon{
-    margin-bottom: 0px;
-    width: 36px;
-    height: 36px;
-}
-.main{
-    width: 100%;
-    height: vh;
-    
-    
-}
-.menu{
-    margin-top: 35px;
-    margin-bottom: 0px;
-}
-.logo{
-    margin-left:  10%;
-    
-}
-.logtext{
-    font-size: 16px;
-}
-
-@media (max-width:768px){
-    .menus{
-        display: none;
-    }
-    .drop{
-        display: inline;
-        background-color: #25252F;
-    }
-    .nav-cont{
-        display: grid;
-        grid-template-columns: 4fr 1fr;
-        height: 8vh;
-    }
-    .logo{
-        margin-top: -6%;
-    }
-    
-}
-@media (min-width:768px){
-    .drop{
-        display: none;
-    }
-}
-.drop-img{
-    width: 3.3125rem;
-    height: 2.9375rem;
-    margin-top: 10%;
-    
-}
-
-.menus.responsive {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    animation: slide-down 0.3s ease-in-out;
-    color: #25252F;
+  /* Global styles */
+  body {
+    font-family: Inria Sans;
   }
-  @keyframes slide-down {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
+  
+  /* Navigation bar styles */
+  nav {
+    background-color: #25252f;
+    color:#94D82D;
+    padding: 10px;
+  }
+  
+  .nav-cont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo h1 {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  
+  .menus {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu {
+    margin-right: 20px;
+  }
+  
+  .menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .menu a:hover {
+    text-decoration: underline;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+  
+  .log {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+  
+  .log a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-left: 10px;
+  }
+  
+  .log img {
+    width: 50px;
+    height: 50px;
+  }
+  img{
+    width: 60px;
+    height: 60px;
+  }
+  .drop {
+    display: none;
+  }
+  .log{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 60px;
+    
+  }
+  .loginicon{
+   
+    height: 45px;
+    margin-right: 20%;
+  }
+
+  /* Media queries for responsiveness */
+  @media only screen and (max-width: 768px) {
+    .menus {
+      display: none;
+      flex-direction: column;
+      
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    .menu{
+        height: 30px;
+        border-bottom: #fff 1px solid;
+        width: 100%;
+        margin: 5%;
+    }
+  
+    .log {
+      margin-left: 0;
+      
+      width: 100%;
+      margin: 5%;
+    }
+  
+    .drop {
+      display: block;
+      cursor: pointer;
+    }
+  
+    .drop-img {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .menus.show {
+      display: flex;
+    }
+  }
+  /* HTML: <div class="loader"></div> */
+/* this is a recreation of twitter search in css */
+.form {
+    --input-text-color: #fff;
+    --input-bg-color: #283542;
+    --focus-input-bg-color: transparent;
+    --text-color: #949faa;
+    --active-color: #94D82D;
+    --width-of-input: 200px;
+    --inline-padding-of-input: 1.2em;
+    --gap: 0.9rem;
+  }
+  /* form style */
+  .form {
+    font-size: 0.9rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: var(--width-of-input);
+    position: relative;
+    isolation: isolate;
+  }
+  /* a fancy bg for showing background and border when focus. */
+  .fancy-bg {
+    position: absolute;
+    width: 100%;
+    inset: 0;
+    background: var(--input-bg-color);
+    border-radius: 30px;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  /* label styling */
+  label {
+    width: 100%;
+    padding: 0.8em;
+    height: 40px;
+    padding-inline: var(--inline-padding-of-input);
+    display: flex;
+    align-items: center;
+  }
+  
+  .search,.close-btn {
+    position: absolute;
+  }
+  /* styling search-icon */
+  .search {
+    fill: var(--text-color);
+    left: var(--inline-padding-of-input);
+  }
+  /* svg -- size */
+  svg {
+    width: 17px;
+    display: block;
+  }
+  /* styling of close button */
+  .close-btn {
+    border: none;
+    right: var(--inline-padding-of-input);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 0.1em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--active-color);
+    opacity: 0;
+    visibility: hidden;
+  }
+  /* styling of input */
+  #searcher{
+    background-color: transparent;
+    border: none;
+  }
+  .input {
+    color: var(--input-text-color);
+    width: 100%;
+    margin-inline: min(2em,calc(var(--inline-padding-of-input) + var(--gap)));
+    background: none;
+    border: none;
+  }
+  
+  .input:focus {
+    outline: none;
+  }
+  
+  .input::placeholder {
+    color: var(--text-color)
+  }
+  /* input background change in focus */
+  .input:focus ~ .fancy-bg {
+    border: 1px solid var(--active-color);
+    background: var(--focus-input-bg-color);
+  }
+  /* search icon color change in focus */
+  .input:focus ~ .search {
+    fill: var(--active-color);
+  }
+  /* showing close button when typing */
+  .input:valid ~ .close-btn {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* this is for the default background in input,when selecting autofill options -- you can remove this code if you do not want to override the browser style.  */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
+  }
+#loader {
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    background: linear-gradient(90deg,#000 50%,#0000 0) right/200% 100%;
+    animation: l21 2s infinite linear;
+  }
+  
+  #loader::before {
+    content: "Loading...";
+    color: #0000;
+    padding: 0 5px;
+    background: inherit;
+    background-image: linear-gradient(90deg,#fff 50%,#000 0);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  
+  @keyframes l21 {
+    100% {
+      background-position: left
     }
   }

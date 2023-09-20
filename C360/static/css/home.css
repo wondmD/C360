@@ -1,5 +1,6 @@
 body{
     background-image: url("{% static 'images/books.jpg' %}");
+    background-color: black;
     color: aliceblue;
     
 }
@@ -13,6 +14,7 @@ body{
     background-size: cover;
     height: 92vh;
     font-family: Inria Sans;
+    
 }
 .hero{
     width: 80%;

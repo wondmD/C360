@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{% static 'resource/css/resource.css' %}">
   <title>Resources</title>
   <script src="{% static 'resource/js/resource.js' %}"></script>
+  <script src="{% static 'js/loader.js' %}"></script>
 </head>
 <body>
   <div class="head">
@@ -41,8 +42,8 @@
               </div>
               <div class="l-n-c-c">
                 
-                <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
-                <div><small>{{course.comments}} comments</small></div>
+                <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
+                <div><small><a href="{% url 'group_page' %}">{{course.comments}}Join course Group</a></small></div>
                 
               </div>
             </div>
@@ -77,8 +78,8 @@
               </div>
               <div class="l-n-c-c">
                 
-                <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
-                <div><small>{{course.comments}} comments</small></div>
+                <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
+                <div><small>{{course.comments}}Join course Group</small></div>
                 
               </div>
             </div>
@@ -97,7 +98,6 @@
   </div>
     <div class="fresh-con">
       {% for semister in semisters %}
-        
         {% if semister.department.name == request.user.department.name and semister.year != '1st year' %}
         <h3 id="fresh-head">{{semister.year}}-{{semister.semister_number}}</h3>
       <div class="cources-con">
@@ -116,8 +116,8 @@
               </div>
               <div class="l-n-c-c">
                 
-                <div><img id="icons" src="{% static 'resource/images/comment.png' %}" alt=""></div>
-                <div><small>{{course.comments}} comments</small></div>
+                <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
+                <div><small>{{course.comments}}Join course Group</small></div>
                 
               </div>
             </div>

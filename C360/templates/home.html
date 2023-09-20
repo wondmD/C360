@@ -8,54 +8,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    
     <style>
-        .container-home{
+        body {
+            font-family: Inria Sans;
+            background-color: black;
+            color: aliceblue;
+            
+        }
+
+        .container-home {
             background-image: url("{% static 'images/books.jpg' %}");
             background-repeat: no-repeat;
             background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        .hero {
+            margin-bottom: 2rem;
+        }
+
+        .hero img {
+            width: 8rem;
+            height: 8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .lower {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lower h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .ticks-cont {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin-top: 2rem;
+        }
+
+        .tick {
+            display: flex;
+            align-items: center;
+            flex-basis: 30%;
+        }
+
+        .tick img {
+            width: 4.375rem;
+            height: 4.125rem;
+            margin-right: 1rem;
+        }
+
+        .tick h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .butn {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #94D82D;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #7db522;
+        }
+
+        @media (max-width: 800px) {
+            .hero p {
+                font-size: 1.5rem;
+            }
+
+            .lower h1 {
+                font-size: 1.5rem;
+            }
+
+            .tick h3 {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    
     <div class="container-home">
-        
         <div class="hero">
-            <div class="emoji">
-                <img src="{% static 'images/sademoji.png' %}" alt="sad emoji">
-            </div>
+            
             <div>
-                <p class="headtext">Are you struggling to get  recourses for the coerces given in ASTU? </p>
+                <p class="headtext">Are you struggling to get resources for the courses given in ASTU?</p>
             </div>
         </div>
         <div class="lower">
             <div class="happy">
-                <h1>This app is here to help you to get: </h1>
+                <h1>This app is here to help you to get:</h1>
             </div>
             <div class="ticks-cont">
-                <div class="ticks">
-                    <div class="tick">
-                        <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
-                        <div><h3>Resource</h3></div>
-                    </div>
-                    <div class="tick">
-                        <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
-                        <div><h3>Curriculum Information</h3></div>
-                    </div>
-                    <div class="tick">
-                        <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
-                        <div><h3>Support</h3></div>
-                    </div>
+                <div class="tick">
+                    <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
+                    <div><h3>Resource</h3></div>
                 </div>
-                <div class="butn">
-                        <a href="#" class="btn"> <div class="btncont"><p class="txt">Get Resource</p></div> </a>
+                <div class="tick">
+                    <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
+                    <div><h3>Curriculum Information</h3></div>
+                </div>
+                <div class="tick">
+                    <div><img id="tick" src="{% static 'images/tick.png' %}" alt="tick"></div>
+                    <div><h3>Support</h3></div>
                 </div>
             </div>
+            <div class="butn">
+                <a href="#" class="btn">Get Resource</a>
+            </div>
         </div>
-        
     </div>
-    
 </body>
 </html>
 {% endblock %}

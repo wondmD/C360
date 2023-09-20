@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+    
+</head>
+<body>
+    {% block content %}
+    <h1 id="fresh-head">Your search results</h1>
+    <div class="cources-con">
+        {% for cource in course_obj %}
+      <div class="course-con">
+        
+            <div class="c-name"><a style="color: #fff; text-decoration: none;" href="{% url 'course_detail' course_id=cource.id %}">{{cource.name}}</a></div>
+            
+            <div class="c-r-no">({{cource.crh}}chrs)---Resources({{cource.resource_count}})</div>
+            <div class="l-n-c">
+              <div class="l-n-c-l">
+            
+                <div><a  href="{% url 'increase_rating' course_id=cource.id %}"><img id="icons" src="{% static 'resource/images/like.png' %}" alt=""></a></div>
+                <div><small> {{cource.rating}} likes</small></div>
+                
+              </div>
+              <div class="l-n-c-c">
+                
+                <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
+                <div><small>{{course.comments}}Join course Group</small></div>
+                
+              </div>
+            </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endblock content %}
+</body>
+</html>
