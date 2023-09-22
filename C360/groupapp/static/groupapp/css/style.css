@@ -10,16 +10,18 @@ body {
   margin: 0 auto;
   padding: 20px;
   display: flex; /* Added */
+  height: 70%;
 }
 
 /* Room Styles */
 .room {
-  background-color: #444;
+  background-color: #000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 20px;
   margin-bottom: 30px;
   flex-grow: 1; /* Added */
+  height: 60%;
 }
 
 .room__top {
@@ -32,19 +34,22 @@ body {
 .room__topLeft h3 {
   font-size: 24px;
   margin-left: 10px;
-  color: #fff;
+  color: #94D82D;
 }
 
 .room__topRight svg {
   width: 24px;
   height: 24px;
-  fill: #999;
+  fill: #94D82D;
   margin-left: 10px;
   cursor: pointer;
 }
 
 .room__topRight svg:hover {
-  fill: #ccc;
+  fill:#94D82D;
+}
+.room__topLeft svg{
+  fill:#94D82D;
 }
 
 .room__box {
@@ -63,7 +68,7 @@ body {
 
 .room__info h3 {
   font-size: 20px;
-  color: #fff;
+  color: #94D82D;
 }
 
 .room__info span {
@@ -86,7 +91,7 @@ body {
 
 .room__author span {
   margin-left: 5px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .room__topics {
@@ -120,7 +125,7 @@ body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #fff;
+  color: #94D82D;
 }
 
 .thread__authorInfo span {
@@ -136,12 +141,12 @@ body {
 .thread__delete svg {
   width: 16px;
   height: 16px;
-  fill: #999;
+  fill: #94D82D;
   cursor: pointer;
 }
 
 .thread__delete svg:hover {
-  fill: #ccc;
+  fill: #94D82D;
 }
 
 .thread__details {
@@ -158,13 +163,14 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
-  color: #fff;
+  color: #94D82D;
   background-color: #555;
 }
 
 /* Participants Styles */
 .participants {
-  background-color: #555;
+  background-color: #222;
+  color: #94D82D;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 20px;
@@ -188,7 +194,7 @@ body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #fff;
+  color: #94D82D;
   margin-bottom: 10px;
 }
 
@@ -213,4 +219,6 @@ body {
   width: 24px;
   height: 24px;
 }
+
+
 

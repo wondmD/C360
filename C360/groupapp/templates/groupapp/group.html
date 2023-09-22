@@ -1,9 +1,12 @@
 {% extends 'main.html' %}
 {% block content %}
+{% load static %}
 <main class="profile-page layout layout--2">
   <div class="container">
-    <!-- Room Start -->
-    <div class="room">
+    
+    {% for course in courses %}
+          {% if group.topic == course %}
+    <div class="room" style="height: 80%;">
       <div class="room__top">
         <div class="room__topLeft">
           <a href="{% url 'home' %}">
@@ -14,11 +17,10 @@
               </path>
             </svg>
           </a>
-          <h3>Study Room</h3>
+          <p>{{course.name}}</p>
+ 
+          <h3></h3>
         </div>
-
-        {% for group in groups %}
-       
 
       </div>
       <div class="room__box scroll">
@@ -40,14 +42,14 @@
           <span class="room__topics">{{group.topic}}</span>
         </div>
 
-        <div class="room__conversation">
+        <div class="room__conversation" style="background-color: #222; border-radius: 10px; " >
           <div class="threads scroll">
             
 
             {% for message in messages %}
           
             {% if message.room.name == group.name %}
-            <div class="thread">
+            <div class="thread" style="margin: 10px; border-radius: 10px; background-color: #111; padding: 10px;">
               <div class="thread__top">
                 <div class="thread__author">
                   <a href="" class="thread__authorInfo">
@@ -61,7 +63,7 @@
                 
 
                 {% if request.user == message.user %}
-                <a href="">
+                <a href="{% url '' %}">
                   <div class="thread__delete">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                       <title>remove</title>
@@ -90,10 +92,12 @@
         </form>
       </div>
     </div>
+    {% endif %}
+          {% endfor %}
     <!-- Room End -->
-    {% endfor %}
+    
     <!--   Start -->
-    {% for group in groups%}
+    
     <div class="participants">
       <h3 class="participants__top">Participants <span>({{group.participants.count}} Joined)</span></h3>
       <div class="participants__list scroll">
@@ -109,10 +113,12 @@
         </a>
         {% endfor %}
       </div>
-      {% endfor %}
+     
+     
     </div>
     <!--  End -->
   </div>
 </main>
-<script src="script.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+          
 {% endblock content %}

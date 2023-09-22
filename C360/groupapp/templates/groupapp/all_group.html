@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+<div class="fresh-con">
+    <h3 id="fresh-head">All groups
+    </h3>
+    <div class="cources-con">
+      {% for group in groups %}
+        
+      <div class="course-con">
+        <div class="c-name"><a style="color: #fff; text-decoration: none;" href="">{{group.name}}</a></div>
+
+            <div class="l-n-c">
+              <div class="l-n-c-l">
+            
+                <div><p>Topic</p></div>
+                <div><small> {{group.topic}}</small></div>
+                
+              </div>
+              <div class="l-n-c-c">
+             
+              </div>
+            </div>
+       
+      </div>
+
+       {% endfor %}
+     
+    </div>
+  </div>
+{% endblock content %}

@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% load static %}
+  {% load custom_filters %}
   
   <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'resource/css/resource.css' %}">
@@ -29,7 +30,7 @@
         {% if semister.year == '1st year' %}
           {% for cource in semister.courses.all %}
       <div class="course-con">
-        
+
             <div class="c-name"><a style="color: #fff; text-decoration: none;" href="{% url 'course_detail' course_id=cource.id %}">{{cource.name}}</a></div>
             
             <div class="c-r-no">({{cource.crh}}chrs)---Resources({{cource.resource_count}})</div>
@@ -43,8 +44,13 @@
               <div class="l-n-c-c">
                 
                 <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
-                <div><small><a href="{% url 'group_page' %}">{{course.comments}}Join course Group</a></small></div>
-                
+                {% with matching_group=groups|first_matching_group:cource %}
+                    {% if matching_group %}
+                        <div><small><a id="link" href="{% url 'group_page' group_id=matching_group.id %}">Join course Group</a></small></div>
+                    {% else %}
+                        <div><small><a id="link" href="{% url 'create_group' course_id=cource.id %}">Create Group</a></small></div>
+                    {% endif %}
+                {% endwith %}
               </div>
             </div>
       </div>
@@ -79,7 +85,14 @@
               <div class="l-n-c-c">
                 
                 <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
-                <div><small>{{course.comments}}Join course Group</small></div>
+                
+                {% with matching_group=groups|first_matching_group:cource %}
+                  {% if matching_group %}
+                      <div><small><a id="link" href="{% url 'group_page' group_id=matching_group.id %}">Join course Group</a></small></div>
+                  {% else %}
+                      <div><small><a id="link" href="{% url 'create_group' course_id=cource.id %}">Create Group</a></small></div>
+                  {% endif %}
+              {% endwith %} 
                 
               </div>
             </div>
@@ -117,8 +130,15 @@
               <div class="l-n-c-c">
                 
                 <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
-                <div><small>{{course.comments}}Join course Group</small></div>
-                
+ 
+
+              {% with matching_group=groups|first_matching_group:cource %}
+                  {% if matching_group %}
+                        <div><small><a id="link"  id="link" href="{% url 'group_page' group_id=matching_group.id %}">Join course Group</a></small></div>
+                  {% else %}
+                      <div><small><a id="link"  href="{% url 'create_group' course_id=cource.id %}">Create Group</a></small></div>
+                  {% endif %}
+              {% endwith %} 
               </div>
             </div>
         </div>
