@@ -1,7 +1,7 @@
 body{
     margin: 0px;
     font-family: Inria Sans;
-    background-color: #000;
+    background-color: #050D12;
 }
 .head{
     display: flex;
@@ -35,7 +35,7 @@ body{
 .fresh-con{
     width : 96%;
     margin: 2%;
-    background-color:rgba(217, 217, 217, 0.10);
+    background-color:#183D3D;
     
     border-radius: 30px;
     
@@ -61,7 +61,7 @@ h2{
     }
 }
 .course-con{
-    background-color: rgba(217, 217, 217, 0.50);
+    background-color: #5C8374;
     width: 80%;
     border-radius: 20px;
     flex-shrink: 0;
@@ -70,7 +70,7 @@ h2{
 
 }
 #fresh-head{
-    color: #94D82D;
+    color: #93B1A6;
     font-family: Inria Sans;
     font-size: 1.5rem;
     font-style: normal;

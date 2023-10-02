@@ -33,7 +33,7 @@
             <p>Hosted By</p>
             <a href="" class="room__author">
               <div class="avatar avatar--small">
-                <img src="{{group.host.profile_pic.url}}" />
+                <img style="width:25px; height:25px; border-radius: 50%;" src="{{group.host.profile_pic.url}}" />
               </div>
               <span>@{{group.host}}</span>
             </a>
@@ -54,7 +54,7 @@
                 <div class="thread__author">
                   <a href="" class="thread__authorInfo">
                     <div class="avatar avatar--small">
-                      <img src="{{message.user.profile_pic.url}}" />
+                      <img style="width:25px; height:25px; border-radius: 50%;" src="{{message.user.profile_pic.url}}" />
                     </div>
                     <span>@{{message.user}} </span>
                   </a>
@@ -63,7 +63,7 @@
                 
 
                 {% if request.user == message.user %}
-                <a href="{% url '' %}">
+                <a href="{% url 'delete_m' message_id=message.id %}">
                   <div class="thread__delete">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                       <title>remove</title>
@@ -76,7 +76,15 @@
                 {% endif %}
               </div>
               <div class="thread__details">
+                
                 {{message.body}}
+                <br>
+                {% if message.attachment %}
+                
+                <a id="link" href="{{message.attachment.url}}" target="_blank">
+                  <img style="width:40px; height:40px;" src="{% static 'images/file2.png' %}" alt="">
+              </a>
+                {% endif %}
               </div>
             </div>
             {% endif %}
@@ -86,9 +94,24 @@
 
       </div>
       <div class="room__message">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
-          <input name="body" placeholder="Write your message here..." />
+          
+          <div id="message_input">
+            <div>
+              <input name="body" placeholder="Write your message here..." />
+            </div>
+            <div class="file-input">
+              <input type="file" id="attachment" name="attachment" class="hidden" style="display: none;"/>
+              <label for="attachment" class="file-input-label">
+                <img style="width: 30px;height: 30px;" src="{% static 'images/attach.png' %}" alt="Attach files">
+                <p>Attach File</p>
+              </label>
+            </div>
+            <div><button type="submit" > <img src="{% static 'images/send.png' %}" alt=""> </button></div>
+           
+          </div>
+          
         </form>
       </div>
     </div>
@@ -103,8 +126,8 @@
       <div class="participants__list scroll">
         {% for user in group.participants.all %}
         <a href="" class="participant">
-          <div class="avatar avatar--medium">
-            <img src="{{user.profile_pic.url}}" />
+          <div  class="avatar avatar--medium">
+            <img style="width:35px; height:35px; border-radius: 50%;" src="{{user.profile_pic.url}}" />
           </div>
           <p>
             {{user.name}}

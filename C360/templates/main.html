@@ -18,6 +18,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <div class="loader" id="loader">
+        <div class="square" id="sq1"></div>
+        <div class="square" id="sq2"></div>
+        <div class="square" id="sq3"></div>
+        <div class="square" id="sq4"></div>
+        <div class="square" id="sq5"></div>
+        <div class="square" id="sq6"></div>
+        <div class="square" id="sq7"></div>
+        <div class="square" id="sq8"></div>
+        <div class="square" id="sq9"></div>
+      </div>
+    <div id="content">
     <nav>
         <div class="nav-cont">
             <div class="logo">
@@ -64,7 +76,7 @@
                 <div class="log">
                     {% if page_user %}
                         {% if page_user.profile_pic %}
-                            <img id="pic"  style='width:50px; height:50px; border-radius: 50%;' src="{{request.user.profile_pic.url}}" alt="Profile Picture">
+                            <img id="pic"  style='width:50px; height:50px; border-radius: 50%;' src="{{page_user.profile_pic.url}}" alt="">
                         {% else %}
                             <img id="pic" style='width:50px; height:50px;' src="{% static 'images/avatar.png' %}" alt="Default Profile Picture">
                         {% endif %}
@@ -83,13 +95,13 @@
         </div>
     </nav>
 
-    <div id="loader"></div>
     
-        <div id="content">
+    
+        <div>
             {% block content %}
 
             {% endblock %}
         </div>
-    
+    </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
   font-family: Inria sans;
-  background-color: #333;
+  background-color: #040D12;
   color: #fff;
 }
 
@@ -15,7 +15,7 @@ body {
 
 /* Room Styles */
 .room {
-  background-color: #000;
+  background-color: #183D3D;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 20px;
@@ -100,9 +100,10 @@ body {
 }
 
 .room__conversation {
-  height: 230px;
+  height: 90%;
   overflow-y: auto;
   padding-right: 10px;
+  
 }
 
 .thread {
@@ -169,7 +170,7 @@ body {
 
 /* Participants Styles */
 .participants {
-  background-color: #222;
+  background-color: #040D12;
   color: #94D82D;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;

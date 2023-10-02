@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import myusers
 from .backends import MyUserBackend
 from django.contrib.auth.hashers import make_password
+from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def index(request):
     page_user = request.user
@@ -35,18 +36,29 @@ def logoutuser(request):
     logout(request)
     return redirect('home')
 
+
+
 def register_page(request):
     form = CreateUserForm()
 
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
+        form = CreateUserForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.password = make_password(form.cleaned_data['password'])
             user.save()
+
+            # Save the profile picture separately
+            profile_pic = request.FILES.get('profile_pic')
+            if profile_pic:
+                fs = FileSystemStorage()
+                filename = fs.save(profile_pic.name, profile_pic)
+                user.profile_pic = filename
+                user.save()
+
             return redirect('login')
 
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'main/register.html', context)
 
 def about(request):

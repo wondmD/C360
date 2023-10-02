@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
-
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +29,15 @@
               <div class="l-n-c-c">
                 
                 <div><img id="icons" src="{% static 'resource/images/group.png' %}" alt=""></div>
-                <div><small>{{course.comments}}Join course Group</small></div>
                 
-              </div>
+                {% with matching_group=groups|first_matching_group:cource %}
+                  {% if matching_group %}
+                      <div><small><a id="link" href="{% url 'group_page' group_id=matching_group.id %}">Join course Group</a></small></div>
+                  {% else %}
+                      <div><small><a id="link" href="{% url 'create_group' course_id=cource.id %}">Create Group</a></small></div>
+                  {% endif %}
+              {% endwith %} 
+                
             </div>
       </div>
       {% endfor %}

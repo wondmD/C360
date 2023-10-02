@@ -1,6 +1,6 @@
 body{
-    background-image: url("{% static 'images/books.jpg' %}");
-    background-color: black;
+    
+    background-color: #040D12;
     color: aliceblue;
     
 }
@@ -9,9 +9,8 @@ body{
     color: #FFF;
 }
 .container-home{
-    background-image: url("{% static 'images/books.jpg' %}");
-    background-repeat: no-repeat;
-    background-size: cover;
+    
+    background-color: #040D12;
     height: 92vh;
     font-family: Inria Sans;
     

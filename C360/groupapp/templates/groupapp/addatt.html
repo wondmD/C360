@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="background-color: #040D12; padding: 20px;">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div style="background-color: #183D3D; padding: 10px; margin-bottom: 10px;">
+        <label for="id_file" style="color: #93B1A6;">File:</label>
+        {{ form.file }}
+      </div>
+      <div style="background-color: #183D3D; padding: 10px; margin-bottom: 10px;">
+        <label for="id_caption" style="color: #93B1A6;">Caption:</label>
+        {{ form.caption }}
+      </div>
+      <button type="submit" style="background-color: #5C8374; color: #93B1A6; padding: 5px 10px;">Upload</button>
+    </form>
+  </div>
+{% endblock %}

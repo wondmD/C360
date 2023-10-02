@@ -61,7 +61,8 @@
   </style>
 </head>
 <body>
-    {% include 'main.html' %}
+    {% extends 'main.html' %}
+    {% block content %}
   <div id="content" class="containera">
     <h1>About Wondmeneh Dereje</h1>
 
@@ -91,5 +92,6 @@
       <p>Contact me via email at <a href="mailto:wondmenehdereje@gmail.com">wondmenehdereje@gmail.com</a> or connect with me on <a href="https://www.linkedin.com/in/your-profile" target="_blank">LinkedIn</a>.</p>
     </div>
   </div>
+  {% endblock content %}
 </body>
 </html>

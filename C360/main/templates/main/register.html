@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Inria Sans;
-      background-color: #000;
+      background-color: #040D12;
       margin: 0;
       padding: 0;
       display: flex;
@@ -16,13 +16,14 @@
     }
 
     .container {
-      background-color: #ffffff;
+      background-color: #183D3D;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       padding: 40px;
       width: 400px;
       max-width: 100%;
       text-align: center;
+      color: #fff;
     }
 
     .container h1 {
@@ -31,19 +32,22 @@
 
     .container input[type="text"],
     .container input[type="password"],
-    .container input[type="email"] {
+    .container input[type="email"],
+    .container input[type="file"],
+    .container input[type="choice"]  {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
+      margin-left: 5%;
       display: inline-block;
       border: 1px solid #ccc;
       box-sizing: border-box;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .container button {
-      background-color: #4caf50;
+      background-color: #5C8374;
       color: white;
       padding: 14px 20px;
       margin: 10px 0;
@@ -55,27 +59,33 @@
     }
 
     .container button:hover {
-      background-color: #45a049;
+      background-color: #93B1A6;
+    }
+    .qwer{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Registration</h1>
-    <form method='POST'  action="" enctype="multipart/form-data">
-      {% csrf_token %}  
-      {% for feilds in form %}
-        {{feilds.label}}
-        {{feilds}}
-      {% endfor %}
-      {{form.errors}}
-      <button type="submit">Register</button>
-    </form>
+    <form method="POST" action="{% url 'register' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="qwer">
+        <div>{{ field.label }}</div>
+        <div>{{ field }}</div>
+    </div>
+    {% endfor %}
+    {{ form.errors }}
+    <button type="submit">Register</button>
+</form>
     <a href="{% url 'login' %}">Already have one? Login</a>
   </div>
 
   <script>
-    // JavaScript code can be added here for additional functionality
+  
   </script>
 </body>
 </html>
