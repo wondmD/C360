@@ -9,7 +9,7 @@
       {% for group in groups %}
         
       <div class="course-con">
-        <div class="c-name"><a style="color: #fff; text-decoration: none;" href="">{{group.name}}</a></div>
+        <div class="c-name"><a style="color: #fff; text-decoration: none;" href="{% url 'group_page' group_id=group.id %}">{{group.name}}</a></div>
 
             <div class="l-n-c">
               <div class="l-n-c-l">
