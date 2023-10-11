@@ -4,3 +4,4 @@ from .models import *
  
 admin.site.register(resource)
 admin.site.register(course)
+admin.site.register(CourseLike)

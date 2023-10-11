@@ -1,5 +1,5 @@
 from django.db import models
-from resource.models import course
+
 
 
 
@@ -25,6 +25,23 @@ class department(models.Model):
         max_length=100,
         choices=school_options,
         default=SoEEC
+    )
+    def __str__(self):
+        return self.name
+class level(models.Model):
+    freshman = "freshman"
+    school = "school"
+    department= "department"
+
+    leval_name_options= [
+        (freshman, 'freshman'),
+        (school, 'school'),
+        (department, 'department')
+    ]
+    name = models.CharField(
+        max_length=100,
+        choices=leval_name_options,
+        default=freshman
     )
     def __str__(self):
         return self.name
@@ -59,10 +76,12 @@ class semister(models.Model):
         max_length=50,
         choices=semisterChoice,
         default = sem1)
-    courses = models.ManyToManyField(course)
-    department = models.ForeignKey('Department', on_delete=models.CASCADE, null=True)
+    class Meta:
+        ordering = ['year', 'semister_number']
+        unique_together = ['year', 'semister_number']
+
     def __str__(self):
-        return (self.department.name +" "+ self.year +' '+self.semister_number)
+        return (self.year +' '+self.semister_number)
 
 
 

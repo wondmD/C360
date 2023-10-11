@@ -1,13 +1,30 @@
+from sqlite3 import IntegrityError
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import course
+from .models import *
 from curriculum.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from groupapp.models import group
+from django.shortcuts import redirect, get_object_or_404
 
-# Create your views here.
+@login_required(login_url='login')
+def like_course(request, course_id):
+    try:
+        if request.method == 'POST':
+            course_t = get_object_or_404(course, id=course_id)
+            if CourseLike.objects.filter(course=course_t, user=request.user).exists():
+                to_be_deleted = CourseLike.objects.filter(course=course_t, user=request.user)
+                to_be_deleted.delete()
+                # CourseLike already exists for this user and course
+                return redirect('resource')
+            else:
+                CourseLike.objects.create(course=course_t, user=request.user)
+                return redirect('resource')
+    except IntegrityError:
+        return redirect('resource')
 
+    
 @login_required(login_url='login')
 def resource(request):
     page_user = request.user
@@ -16,15 +33,16 @@ def resource(request):
     courses = course.objects.all()
     semisters= semister.objects.all()
     groups = group.objects.all()
-    department = page_user.department
-    
+    department = page_user.department   
+    likes= CourseLike.objects.all()
     context = {'page_user':page_user, 
         'courses':courses, 
         'department':department, 
         'semisters':semisters,
-        'groups':groups}
+        'groups':groups,
+        'likes':likes}
 
-    return render(request, 'resource/resources.html', context)
+    return render(request, 'resource/index.html', context)
 
 
 @login_required(login_url='login')

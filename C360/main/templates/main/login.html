@@ -1,88 +1,135 @@
 <!DOCTYPE html>
 <html>
+{% load static %}
 <head>
-  <title>Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Yinka Enoch Adedokun">
+	<title>Login Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+  
   <style>
-    body {
-      font-family: Inria Sans;
-      
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color:white;
-      background-color: #040D12;
-    }
-
-    .container {
-      background-color: #183D3D;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      padding: 40px;
-      width: 400px;
-      max-width: 100%;
-      text-align: center;
-    }
-
-    .container h1 {
-      margin-top: 0;
-    }
-
-    .container input[type="text"],
-    .container input[type="password"] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      border-radius: 4px;
-      font-size: 16px;
-      font-family: Inria Sans;
-    }
-
-    .container button {
-      background-color: #5C8374;
-      color: white;
-      padding: 14px 20px;
-      margin: 10px 0;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-      border-radius: 4px;
-      font-size: 16px;
-      font-family: Inria Sans;
-    }
-    .link{
-      text-decoration: none;
-      color: #ccc;
-    }
-
-    .container button:hover {
-      background-color: #93B1A6;
-    }
+    .main-content{
+	width: 50%;
+	border-radius: 20px;
+	box-shadow: 0 5px 5px rgba(0,0,0,.4);
+	margin: 5em auto;
+	display: flex;
+}
+.company__info{
+	background-color: #008080;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+}
+.fa-android{
+	font-size:3em;
+}
+@media screen and (max-width: 640px) {
+	.main-content{width: 90%;}
+	.company__info{
+		display: none;
+	}
+	.login_form{
+		border-top-left-radius:20px;
+		border-bottom-left-radius:20px;
+	}
+}
+@media screen and (min-width: 642px) and (max-width:800px){
+	.main-content{width: 70%;}
+}
+.row > h2{
+	color:#008080;
+}
+.login_form{
+	background-color: #fff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	border-top:1px solid #ccc;
+	border-right:1px solid #ccc;
+}
+form{
+	padding: 0 2em;
+}
+.form__input{
+	width: 100%;
+	border:0px solid transparent;
+	border-radius: 0;
+	border-bottom: 1px solid #aaa;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin:1.5em auto;
+	transition: all .5s ease;
+}
+.form__input:focus{
+	border-bottom-color: #008080;
+	box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	border-radius: 4px;
+}
+.btn{
+	transition: all .5s ease;
+	width: 70%;
+	border-radius: 30px;
+	color:#008080;
+	font-weight: 600;
+	background-color: #fff;
+	border: 1px solid #008080;
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+}
+.btn:hover, .btn:focus{
+	background-color: #008080;
+	color:#fff;
+}
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Login</h1>
-    {% for mesage in messages %}
-    <p>{{ mesage }}</p>
-    {% endfor %}
-    <form method="POST" action="">
-      {% csrf_token %}
-      <input type="text" name="name" placeholder="Username" required>
-      <input type="password" name="pass" placeholder="Password" required>
-      <button type="submit">Login</button>
-      <a class="link" href="{% url 'register' %}">Don't have one? Register</a>
-    </form>
-  </div>
-
-  <script>
-    // JavaScript code can be added here for additional functionality
-  </script>
+	<!-- Main Content -->
+	<div class="container-fluid">
+		<div class="row main-content bg-success text-center">
+			<div class="col-md-4 text-center company__info">
+				<span class="company__logo"><h2><span class="fa fa-android"></span></h2></span>
+				<h4 class="company_title">Your Company Logo</h4>
+			</div>
+			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+				<div class="container-fluid">
+					<div class="row">
+						<h2>Log In</h2>
+					</div>
+					<div class="row">
+						<form method="POST" control="" class="form-group">
+              {% csrf_token %}
+							<div class="row">
+								<input type="text" name="name" id="username" class="form__input" placeholder="Username" required>
+							</div>
+							<div class="row">
+								<!-- <span class="fa fa-lock"></span> -->
+								<input type="password" name="pass" id="password" class="form__input" placeholder="Password" required>
+							</div>
+							<div class="row">
+								<input type="checkbox" name="remember_me" id="remember_me" class="">
+								<label for="remember_me">Remember Me!</label>
+							</div>
+							<div class="row">
+								<input type="submit" value="Submit" class="btn">
+							</div>
+						</form>
+					</div>
+					<div class="row">
+						<p>Don't have an account? <a href="{% url 'register' %}">Register Here</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<div class="container-fluid text-center footer">
+		<p>CURRICULUM360</p>
+	</div>
 </body>
 </html>

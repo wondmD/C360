@@ -1,19 +1,14 @@
 from django.db import models
+from curriculum.models import *
+from main.models import *
 
-class resource(models.Model):
-    name = models.CharField("Name", max_length=250)
-    file = models.FileField(upload_to="resource/static/resource")
-    description = models.TextField()
-    rating = models.IntegerField()
-    def __str__(self):
-        return self.name
 
 class course(models.Model):
     name = models.CharField("Name", max_length=200)
+    semister = models.ForeignKey(semister , on_delete=models.CASCADE, null=True)
     description =models.TextField()
-    resource= models.ManyToManyField(resource)
+    department = models.ForeignKey(department, on_delete=models.SET_NULL, null=True)
     crh = models.IntegerField()
-    rating = models.IntegerField()
     couree_type1 = "Mandatory"
     course_type2 = 'Elective'
     course_type3 = 'Free-Elective'
@@ -24,14 +19,29 @@ class course(models.Model):
     ]
     course_type = models.CharField(max_length=200, choices=course_typechoice,default=couree_type1)
 
-    @property
-    def resource_count(self):
-        return self.resource.count()
+    class Meta:
+        ordering = ["-course_type", "name"]
     
-    def increase_rating(self):
-        self.rating += 1
-        self.save()
+    def __str__(self):
+        return self.name
+
+class CourseLike(models.Model):
+    user = models.ForeignKey(myusers, on_delete=models.CASCADE)
+    course = models.ForeignKey(course, on_delete=models.CASCADE)
     
+    class Meta:
+        unique_together = ('user', 'course')
+
+    def __str__(self):
+        return f"{self.user.username} likes {self.course.name}"
+
+class resource(models.Model):
+    name = models.CharField("Name", max_length=200)
+    course = models.ForeignKey(course, on_delete=models.CASCADE, null=True)
+    file = models.FileField(upload_to="resource/static/resource")
+    description = models.TextField()
+    
+
     def __str__(self):
         return self.name
 

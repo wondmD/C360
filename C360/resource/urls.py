@@ -5,4 +5,5 @@ urlpatterns =[
     path('like/<int:course_id>/', views.increase_rating, name='increase_rating'),
     path('course/<int:course_id>/', views.course_detail, name="course_detail"),
     path('search/', views.search_course, name='search'),
+    path('like/<int:course_id>', views.like_course, name='like_course')
 ]

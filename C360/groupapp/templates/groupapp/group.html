@@ -1,147 +1,95 @@
-{% extends 'main.html' %}
+{% extends 'resource/index.html' %}
+
 {% block content %}
-{% load static %}
-<main class="profile-page layout layout--2">
-  <div class="container">
-    
-    {% for course in courses %}
-          {% if group.topic == course %}
-    <div class="room" style="height: 80%;">
-      <div class="room__top">
-        <div class="room__topLeft">
-          <a href="{% url 'home' %}">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-              <title>arrow-left</title>
-              <path
-                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
-              </path>
-            </svg>
-          </a>
-          <p>{{course.name}}</p>
- 
-          <h3></h3>
-        </div>
+  {% load static %}
 
-      </div>
-      <div class="room__box scroll">
-        <div class="room__header scroll">
-          <div class="room__info">
-            <h3>{{group.name}}</h3>
-            <span>{{group.created|timesince}} ago</span>
-          </div>
-          <div class="room__hosted">
-            <p>Hosted By</p>
-            <a href="" class="room__author">
-              <div class="avatar avatar--small">
-                <img style="width:25px; height:25px; border-radius: 50%;" src="{{group.host.profile_pic.url}}" />
-              </div>
-              <span>@{{group.host}}</span>
-            </a>
-          </div>
-          
-          <span class="room__topics">{{group.topic}}</span>
-        </div>
+  <!---vcdsfdfdfdsfdsfds Room End ---------------------------------------------------------------->
+  {% for course in courses %}
+    {% if group.topic == course %}  
+      <section style="background-color: #eee;margin: 0; padding: 0;">
+        <div style="margin: 0; padding: 0;" class="container py-5">
+          <div style="margin: 0; padding: 0;" class="row d-flex justify-content-center">
+            <div style="margin: 0; padding: 0;" class="col-md-10 col-lg-8 col-xl-6">
 
-        <div class="room__conversation" style="background-color: #222; border-radius: 10px; " >
-          <div class="threads scroll">
-            
-
-            {% for message in messages %}
-          
-            {% if message.room.name == group.name %}
-            <div class="thread" style="margin: 10px; border-radius: 10px; background-color: #111; padding: 10px;">
-              <div class="thread__top">
-                <div class="thread__author">
-                  <a href="" class="thread__authorInfo">
-                    <div class="avatar avatar--small">
-                      <img style="width:25px; height:25px; border-radius: 50%;" src="{{message.user.profile_pic.url}}" />
-                    </div>
-                    <span>@{{message.user}} </span>
-                  </a>
-                  <span class="thread__date"> {{message.created|timesince}} ago</span>
+              <div style="margin: 0; padding: 0;" class="card" id="chat2">
+                <div class="card-header d-flex justify-content-between align-items-center p-3">
+                  <h5 class="mb-0">{{ course.name }}</h5>
+                  <h5>{{ group.name }}</h5>
+                  {{ group.created|timesince }} ago
                 </div>
-                
+                <div id="message-container" class="card-body"  data-mdb-perfect-scrollbar="true" style="position: relative; height: 50vh; overflow: auto;">
+                  {% for message in messages %}
+                    {% if message.room.name == group.name %}
+                      {% if message.user == request.user %}
+                        <div class="d-flex flex-row justify-content-start">
+                          <img style="border-radius: 50%; width: 35px; height: 35px;" src="{{ message.user.profile_pic.url }}" alt="avatar 1" style="width: 45px; height: 100%;">
+                          <div>
+                            <p class="h6 p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7; border-radius: 10px;">
+                              {{ message.body }}
+                              {% if message.attachment %}
+                                <a id="link" href="{{ message.attachment.url }}" target="_blank">
+                                  <img style="width: 40px; height: 40px;" src="{% static 'images/file2.png' %}" alt="">
+                                </a>
+                              {% endif %}
+                            </p>
+                            <p class="small ms-3 mb-3 rounded-3 text-muted">{{ message.created|timesince }} ago</p>
+                          </div>
+                        </div>
+                        <div class="divider d-flex align-items-center mb-4">
+                          <p class="text-center mx-3 mb-0" style="color: #a2aab7;">+++</p>
+                        </div>
+                      {% else %}
+                        <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                          <div class="rounded-10">
+                            <p style="border-radius: 10px;" class="small p-2 text-white rounded-10 bg-primary">
+                              {{ message.body }}
+                              {% if message.attachment %}
+                                <a id="link" href="{{ message.attachment.url }}" target="_blank">
+                                  <img style="width: 40px; height: 40px;" src="{% static 'images/file2.png' %}" alt="">
+                                </a>
+                              {% endif %}
+                            </p>
+                            <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">{{ message.created|timesince }} ago</p>
+                          </div>
+                          <img src="{{ message.user.profile_pic.url }}" alt="avatar 1" style="width: 45px; height: 100%;">
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
 
-                {% if request.user == message.user %}
-                <a href="{% url 'delete_m' message_id=message.id %}">
-                  <div class="thread__delete">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                      <title>remove</title>
-                      <path
-                        d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z">
-                      </path>
-                    </svg>
+              <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-footer text-muted d-flex justify-content-end align-items-center p-3">
+                  <div class="col-xl-1 col-md-1 col-2">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 3" style="width: 40px; height: 100%;">
                   </div>
-                </a>
-                {% endif %}
-              </div>
-              <div class="thread__details">
-                
-                {{message.body}}
-                <br>
-                {% if message.attachment %}
-                
-                <a id="link" href="{{message.attachment.url}}" target="_blank">
-                  <img style="width:40px; height:40px;" src="{% static 'images/file2.png' %}" alt="">
-              </a>
-                {% endif %}
-              </div>
+                  <div class="col-xl-1 col-md-9 col-7">
+                    <input name="body" type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Type message">
+                  </div>
+                  <div class="file-input col-xl-3 col-md-1 col-1">
+                    <input type="file" id="attachment" name="attachment" class="hidden" style="display: none;"/>
+                    <label for="attachment" class="file-input-label">
+                      <i class="fas fa-paperclip"></i>
+                    </label>
+                  </div>
+                  <div class="col-xl-1 col-md-1 col-2">
+                    <button style="background: none; border:none;" type="submit">
+                      <i class="fas fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+
             </div>
-            {% endif %}
-            {% endfor %}
           </div>
         </div>
-
-      </div>
-      <div class="room__message">
-        <form action="" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          
-          <div id="message_input">
-            <div>
-              <input name="body" placeholder="Write your message here..." />
-            </div>
-            <div class="file-input">
-              <input type="file" id="attachment" name="attachment" class="hidden" style="display: none;"/>
-              <label for="attachment" class="file-input-label">
-                <img style="width: 30px;height: 30px;" src="{% static 'images/attach.png' %}" alt="Attach files">
-                <p>Attach File</p>
-              </label>
-            </div>
-            <div><button type="submit" > <img src="{% static 'images/send.png' %}" alt=""> </button></div>
-           
-          </div>
-          
-        </form>
-      </div>
-    </div>
+        
+      </section>
     {% endif %}
-          {% endfor %}
-    <!-- Room End -->
-    
-    <!--   Start -->
-    
-    <div class="participants">
-      <h3 class="participants__top">Participants <span>({{group.participants.count}} Joined)</span></h3>
-      <div class="participants__list scroll">
-        {% for user in group.participants.all %}
-        <a href="" class="participant">
-          <div  class="avatar avatar--medium">
-            <img style="width:35px; height:35px; border-radius: 50%;" src="{{user.profile_pic.url}}" />
-          </div>
-          <p>
-            {{user.name}}
-            <span>@{{user.username}}</span>
-          </p>
-        </a>
-        {% endfor %}
-      </div>
-     
-     
-    </div>
-    <!--  End -->
-  </div>
-</main>
-<script src="{% static 'js/script.js' %}"></script>
-          
-{% endblock content %}
+  {% endfor %}
+  
+
+{% endblock %}
+

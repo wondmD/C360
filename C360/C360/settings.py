@@ -80,6 +80,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'custom_filters': 'resource.custom_filters',
+                'custom_filters2': 'resource.custom_filters2',
             },
         },
     },
