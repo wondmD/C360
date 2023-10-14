@@ -285,8 +285,8 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Your Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <a href="{% url 'register_superuser' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-user-shield"></i> Get admin Account</a>
                     </div>
 
                     <!-- Content Row -->
@@ -309,7 +309,10 @@
                             <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                                 {% csrf_token %}
                                 <button style="background: none; border: none; padding: 0px;" type="submit">
-                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">{{likes.count}}
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">
+                                    {% with like_count=course.courselike_set.count %}
+                                    {{like_count}}
+                                    {% endwith %}
                                 </button>
                             </form>
                         
@@ -317,7 +320,10 @@
                         <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                             {% csrf_token %}
                             <button style="background: none; border: none; padding: 0px;" type="submit">
-                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">{{likes.count}}
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">
+                                {% with like_count=course.courselike_set.count %}
+                                    {{like_count}}
+                                    {% endwith %}
                             </button>
                         </form>
                         {% endif %}
@@ -350,7 +356,10 @@
                                             <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                                                 {% csrf_token %}
                                                 <button style="background: none; border: none; padding: 0px;" type="submit">
-                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">{{likes.count}}
+                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">
+                                                    {% with like_count=course.courselike_set.count %}
+                                                    {{like_count}}
+                                                    {% endwith %}
                                                 </button>
                                             </form>
                                         
@@ -358,7 +367,10 @@
                                         <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                                             {% csrf_token %}
                                             <button style="background: none; border: none; padding: 0px;" type="submit">
-                                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">{{likes.count}}
+                                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">
+                                                {% with like_count=course.courselike_set.count %}
+                                                {{like_count}}
+                                                {% endwith %}
                                             </button>
                                         </form>
                                         {% endif %}

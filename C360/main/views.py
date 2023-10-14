@@ -63,3 +63,18 @@ def register_page(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def register_superuser(request):
+    if request.method == 'POST':
+        passcode = request.POST.get('code')
+        form = CreateUserForm(request.POST)
+        if form.is_valid() and passcode=='wond1234':
+            user = form.save(commit=False)
+            user.is_superuser = True
+            user.save()
+            login(request, user)
+            return redirect('admin:index')  # Redirect to Django admin index page
+    else:
+        form = CreateUserForm()
+    return render(request, 'main/register_superuser.html', {'form': form})
+

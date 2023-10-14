@@ -138,26 +138,25 @@ form{
 <body>
 	<!-- Main Content -->
 	<div class="container-fluid">
-		<div class="">
-			
-			<a href="{% url 'register_superuser' %}" class=""><i
-					class="fas fa-user-shield"></i> Get admin Account</a>
-	</div>
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 				<span class="company__logo"><h2><span class="fa fa-android"></span></h2></span>
 				<h4 class="company_title">Your Company Logo</h4>
 			</div>
-			
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<h2>Log In</h2>
+						<h2>Superuser Registration</h2>
+                        <p>To get passcode contact @ <a href="t.me/">Wondmeneh</a></p>
 					</div>
 					<div class="row">
 						<form method="POST" control="" class="form-group">
                             
 							<div class="row">
+                                <div class="qwer">
+									<div><label for="">passcode</label></div>
+									<div id="fields"> <input name="code" type="password"> </div>
+								</div>
 								{% csrf_token %}
 								{% for field in form %}
 								<div class="qwer">

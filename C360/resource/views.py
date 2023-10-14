@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from groupapp.models import group
 from django.shortcuts import redirect, get_object_or_404
+from .forms import CourseForm
 
 @login_required(login_url='login')
 def like_course(request, course_id):
@@ -75,3 +76,27 @@ def find_by_sem(request, id):
     t_semister = semister.objects.get(id=id)
     context = {'groups':groups,'page_user':page_user,'t_semister':t_semister, 'semisters':semisters, 'courses':courses}
     return render(request, 'resource/find_by_sem.html', context)
+
+
+def add_edit_course(request, course_id=None):
+    # If course_id is provided, fetch the existing course instance, otherwise create a new one
+    if course_id:
+        instance = course.objects.get(id=course_id)
+    else:
+        instance = None
+    
+    if request.method == 'POST':
+        form = CourseForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('course_list')  # Replace 'course_list' with the actual URL name for the course list view
+    else:
+        form = CourseForm(instance=instance)
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'resource/add_edit_course.html', context)
+
+def myadmin(request):
+    return render(request, 'resource/admin.html')
