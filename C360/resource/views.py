@@ -45,14 +45,9 @@ def resource(request):
     return render(request, 'resource/index.html', context)
 
 
-@login_required(login_url='login')
-def increase_rating(request, course_id):
-    cource = course.objects.get(id=course_id)
-    cource.increase_rating()
-    return redirect('resource')  
-@login_required(login_url='login')
 
-
+ 
+@login_required(login_url='login')
 def course_detail(request, course_id):
     cource = course.objects.get(id=course_id)
     context = {'target_course':cource}
@@ -69,3 +64,14 @@ def search_course(request):
         return render(request, 'resource/search.html', context)
     else:
         return render(request, 'resource/search.html')
+    
+
+@login_required(login_url='login') 
+def find_by_sem(request, id):
+    groups = group.objects.all()
+    courses = course.objects.all()
+    semisters= semister.objects.all()
+    page_user = request.user
+    t_semister = semister.objects.get(id=id)
+    context = {'groups':groups,'page_user':page_user,'t_semister':t_semister, 'semisters':semisters, 'courses':courses}
+    return render(request, 'resource/find_by_sem.html', context)
