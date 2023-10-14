@@ -5,9 +5,11 @@ from resource.models import course
 from django.contrib.auth.decorators import login_required
 from .forms import GroupForm
 
+
 # Create your views here.
 @login_required(login_url='login')
 def group_page(request, group_id):
+    page_user= request.user
     messages = Message.objects.all()
     this_group = group.objects.get(id=group_id)
     courses = course.objects.all()
@@ -26,7 +28,7 @@ def group_page(request, group_id):
         
         
         return redirect('group_page', group_id=this_group.id)
-    context = {'group':this_group, 'messages':messages,'courses':courses, 'page_user':page_user}
+    context = {'page_user':page_user,'group':this_group, 'messages':messages,'courses':courses, 'page_user':page_user}
     return render(request , 'groupapp/group.html',context)
 
 def deleteMessage(request, message_id):
@@ -46,6 +48,7 @@ def deleteMessage(request, message_id):
 def create_group(request, course_id):
     form = GroupForm()
     topic = course.objects.get(id=course_id)
+    page_user = request.user
     if request.method == 'POST':
         group.objects.create(
             host=request.user,
@@ -55,7 +58,7 @@ def create_group(request, course_id):
         )
         return redirect('resource')
 
-    context = {'form': form, 'topic': topic}
+    context = {'page_user':page_user,'form': form, 'topic': topic}
     return render(request, 'groupapp/create_group.html', context)
 
 @login_required(login_url='login')
