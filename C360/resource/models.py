@@ -7,8 +7,15 @@ class course(models.Model):
     name = models.CharField("Name", max_length=200)
     semister = models.ForeignKey(semister , on_delete=models.CASCADE, null=True)
     description =models.TextField()
-    department = models.ForeignKey(department, on_delete=models.SET_NULL, null=True)
+    department = models.ManyToManyField(department) 
+    prerequest = models.CharField(max_length=200, null=True, default='None')
     crh = models.IntegerField()
+    st1 = 'Applied'
+    st2 = 'Engineering'
+    stream_choice = [
+        (st1 , 'Applied'),
+        (st2, 'Engineering')
+    ]
     couree_type1 = "Mandatory"
     course_type2 = 'Elective'
     course_type3 = 'Free-Elective'
@@ -28,7 +35,6 @@ class course(models.Model):
 class CourseLike(models.Model):
     user = models.ForeignKey(myusers, on_delete=models.CASCADE)
     course = models.ForeignKey(course, on_delete=models.CASCADE)
-    
     class Meta:
         unique_together = ('user', 'course')
 
@@ -40,8 +46,6 @@ class resource(models.Model):
     course = models.ForeignKey(course, on_delete=models.CASCADE, null=True)
     file = models.FileField(upload_to="resource/static/resource")
     description = models.TextField()
-    
-
     def __str__(self):
         return self.name
 

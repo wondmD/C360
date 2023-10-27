@@ -1,8 +1,8 @@
 /* styles.css */
 body{
-    color: white;
-    background-color: #333;
-    font-family: Inria Sans;
+    color: #333;
+    background-color: #fff;
+    
 }
 /* Container styles */
 .course-container-d {
@@ -17,21 +17,21 @@ body{
 /* Course name styles */
 .course-name {
     font-weight: bold;
-    color: #ffffff;
+    color: #333;
     font-size: 24px;
 }
 
 /* Course description styles */
 .course-description {
     margin-top: 10px;
-    color: #c0bcbc;
+    color: #333;
 }
 
 /* Course type styles */
 .course-type {
     margin-top: 10px;
     font-style: italic;
-    color: #d1cbcb;
+    color: #555;
 }
 
 /* Course rating styles */
@@ -50,8 +50,8 @@ body{
 .resource-section ul {
     list-style-type: none;
     padding: 10px;
-    background-color: #222;
-    width: 30%;
+    background-color: #ccc;
+    width:  50%;
     border-radius: 20px;
 }
 
@@ -60,7 +60,7 @@ body{
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #fdfdfd;
+    color: #333;
     font-size: larger;
     text-decoration: none;
     margin-bottom: 10px;
@@ -82,6 +82,9 @@ body{
 @media screen and (max-width: 768px) {
     .course-container {
         padding: 10px;
+    }
+    .resource-section ul{
+        width: 100%;
     }
 
     .course-name {

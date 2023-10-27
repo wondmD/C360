@@ -140,8 +140,7 @@ form{
 	<div class="container-fluid">
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
-				<span class="company__logo"><h2><span class="fa fa-android"></span></h2></span>
-				<h4 class="company_title">Your Company Logo</h4>
+				<img src="{% static 'images/logo.svg' %}">
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
@@ -158,6 +157,7 @@ form{
 									<div id="fields"> <input name="code" type="password"> </div>
 								</div>
 								{% csrf_token %}
+								<div class="error-message">{{ form.errors.email }}</div>
 								{% for field in form %}
 								<div class="qwer">
 									<div>{{ field.label }}</div>

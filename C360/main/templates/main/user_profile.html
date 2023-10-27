@@ -1,0 +1,59 @@
+{% extends 'resource/index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <!-- Profile Picture -->
+        {% if target_user.profile_pic %}
+            
+            <img class="img-fluid rounded-circle"
+            src="{{target_user.profile_pic.url}}">
+        {% else %}
+            <img class="img-fluid rounded-circle"
+            src="{% static 'images/avatar.png' %}">
+        {% endif %}
+        
+      </div>
+      <div class="col-md-8">
+        <!-- User Information -->
+        <h2>User Profile</h2>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Name:</strong> {{target_user.username}}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Email:</strong> {{target_user.email}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Department:</strong> {{target_user.department }}</p>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Role:</strong> 
+              {% if target_user.is_superuser %}
+              Adminstrator
+              {% else %}
+              System User
+              {% endif %}
+            </p>
+          </div>
+          
+        </div>
+        {% if target_user == page_user %}
+        <div class="row">
+          <div class="col-md-6">
+              <a href="{% url 'edit_user' user_id=target_user.id %}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAaElEQVR4nO3SMQ6AMAxD0X8zuAULR6lERm4LO0hhaNkoDK2ZYsnrs1IVIjkJ2IEJQQzw0hOYlQMOHL0uGV5GtlbcCmSVkdQD98qI9cS9dG1Bv/C7I0J8CdzjWX75Lahx1DhqHDUe4SkXeTh2dNdu08cAAAAASUVORK5CYII=">Edit</a>
+          </div>
+          
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

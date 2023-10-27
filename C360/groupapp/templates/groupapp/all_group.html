@@ -1,32 +1,34 @@
-{% extends 'main.html' %}
+{% extends 'resource/index.html' %}
 
 {% block content %}
 {% load static %}
-<div class="fresh-con">
-    <h3 id="fresh-head">All groups
+<div class="fresh-con container-fluid">
+    <h3 id="fresh-head ">All groups
     </h3>
-    <div class="cources-con">
+    <div class="row">
       {% for group in groups %}
         
-      <div class="course-con">
-        <div class="c-name"><a style="color: #fff; text-decoration: none;" href="{% url 'group_page' group_id=group.id %}">{{group.name}}</a></div>
-
-            <div class="l-n-c">
-              <div class="l-n-c-l">
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        
+                        <div class="h6 mb-0 font-weight-bold text-gray-800">{{group.name}} </div>
             
-                <div><p>Topic</p></div>
-                <div><small> {{group.topic}}</small></div>
-                
-              </div>
-              <div class="l-n-c-c">
-             
-              </div>
+                    </div>
+                    
+                    <div class="col-auto">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACpklEQVR4nO2WzYvTQBjGI/gFevCgXvTuzX/Bq7CJopOyHhbqqQdpRt31YIJa/LgIXkTEj4Mn0YPgwUPCil4EdSs005XSyWYGj6LsZbetoMLuyJs2UmzaTUqyzeI88EBJJsPzm3ln3iqKlJSUlJTU/yYxf+qgcLRbwtGIsLVOYEd1ha3dhHdKniWcEwXhqC3haCLaakvYU7qS2/C2tj48fM8wJm8QIiibUSs/4FVhHz+g5EWiW/Nxw/d2Qr2h5EXC1uqJARzVHTaf7/u7XMqxS/mC6/FOYMoXapQZ8C4DALU9BkArai6ytHSIUFYnHhdRdiknMCZdgGT1//cc/DsPrO6o8KQPItWdCO78FEoIymaj8CR0k5XTA4AmlXwHrg8CsGpsAI9/nNw1aqsr4pW6fwDA4+24AK7H26kBBBD2lB67kTna6ag5kgAQygfOUDoQ0KRGrfyQ8BMtoX5Bh4UmJWytFlyvgbUa1HxU2fQL7vmJHOK01GtgJM412mg0dip5FDSpURBuFo0sbcHqkiYrQ53Dwe4d7g/wLLOVL5yr7C0Ypo6w+Qhhs4oMcxkZ5q+el4Nn2HoIY2bm5vYoedHJ85V9yLDuIGyu6tgScYywtQLfwLcTDV8oW2d1bH6PG3wAxLC+IXy5uOnBj1Uq23XDfDBu8AiQJ6VSaQfMvej7h+semyWUvSEe++pS/hMMv7vP/IswZuzwxWJlNzKs12mFD31m9tq76ufmC5eytY2vUbZGKHs+Dsg2hM2naYcPffXuYwgnEvwf6tQ9Nh07PcKmlVX40PefvYwNQLq7sQ4lFyf8UYSt31kDTF+4Iubff0oMQTx/ZjRABnU/zJdu30sE0DX7sUi/HBkKsFnhQ5PEAMFOvN3SAMTjQgLoed0BKSkpKSkpZYvpDy3uGSxsk+05AAAAAElFTkSuQmCC">
+                        <div><small><a id="link" href="{% url 'group_page' group_id=group.id %}">Go To Group</a></small></div> 
+                    </div>
+                </div>
             </div>
-       
-      </div>
+        </div>
+    </div>
 
        {% endfor %}
      
-    </div>
+      </div>
   </div>
 {% endblock content %}

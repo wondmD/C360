@@ -1,0 +1,34 @@
+{% extends 'resource/index.html' %}
+{% block content %}
+<div class="container-fluid">
+    <!-- resource/add_edit_course.html -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.instance.pk %}
+      <h2>Edit Edit Resource</h2>
+    {% else %}
+      <h2>Add Resource</h2>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="id_semister">Name:</label>
+      {{ form.name }}
+    </div>
+    <div class="form-group">
+      <label for="id_description">Course:</label>
+      {{ form.course }}
+    </div>
+    <div class="form-group">
+      <label for="id_course_level">File:</label>
+      {{ form.file }}
+    </div>
+    <div class="form-group">
+      <label for="id_department">Description:</label>
+      {{ form.description }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+
+{% endblock content %}

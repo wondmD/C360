@@ -1,7 +1,9 @@
 <!-- template.html -->
-{% extends 'main.html' %}
+{% extends 'resource/index.html' %}
 
 {% load static %}
+{% load custom_filters %}
+{% load custom_filters2 %}
 {% block content %}
 <!DOCTYPE html>
 <html>
@@ -13,30 +15,50 @@
 </head>
 <body>
     
-    <h1>Course Detail</h1>
+    <div class="container-fluid">
+        <h1>Course Detail</h1>
         <div class="course-container-d">
             <div class="course-name">{{ target_course.name }}</div>
             <div class="course-description">{{ target_course.description }}</div>
             <div class="course-type">Type: {{ target_course.get_course_type_display }}</div>
-            <div class="course-rating">Rating: {{ target_course.rating }}</div>
+            <div class="course-type">prerequisite: {{ target_course.prerequest }}</div>
+            <div class="course-rating">Rating:
+                {% with like_count=target_course.courselike_set.count %}
+                    {{ like_count }}
+                {% endwith %} 
+            </div>
             <div class="course-resource-count">Resources : {{ target_course.resource_count }}</div>
             <div class="resource-section">
                 <h3>Resources</h3>
+                {% if request.user.is_superuser %}
+                
+                <h4><a href="{% url 'add_resource' %}">Add Resource</a></h4>
+                {% endif %}
                 <ul>
-                {% for resource in target_course.resource.all %}
+                {% for resource in resources %}
+                
+                {% if resource.course == target_course %}
                      <li>
+                        {% if request.user.is_superuser %}
+                        <h4><a href="{% url 'edit_resource' resource_id=resource.id %}">Edit Resource</a></h4>
+                        {% endif %}
+                        <ul>
                         <a href="{{ resource.file.url }}" target="_blank">
                             <img src="{% static 'resource/images/download.png' %}" alt="">
-                            Download {{ resource.name }}
+                            Download  {{ resource.name }}
+                            
+                            
                         </a>
+                        <p>{{resource.description}}</p>
                         <hr>
                     </li>
-
+                {% endif %}
                 {% endfor %}
                 </ul>
             </div>
         </div>
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>
 {% endblock content %}

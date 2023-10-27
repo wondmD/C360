@@ -5,9 +5,9 @@ from django.db import models
 
 
 # Create your models here.
+
 class department(models.Model):
     name = models.CharField(max_length=100)
-
     SoANS='School of Applied Natural Sciences'
     SoCEA='School of Civil Engineering and Architecture'
     SoEEC='School of Electrical Engineering and Computing'
@@ -26,6 +26,13 @@ class department(models.Model):
         choices=school_options,
         default=SoEEC
     )
+    st1 = 'Applied'
+    st2 = 'Engineering'
+    stream_choice = [
+        (st1 , 'Applied'),
+        (st2, 'Engineering')
+    ]
+    stream = models.CharField(max_length=50, choices=stream_choice, default=st2)
     def __str__(self):
         return self.name
 class level(models.Model):

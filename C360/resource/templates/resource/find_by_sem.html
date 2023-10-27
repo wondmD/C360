@@ -4,31 +4,37 @@
 {% block content %}
 
 <div id="content">
-<div class="container-fluid mb-5">\
+<div class="container-fluid mb-5">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Find by Semester</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <a href="{% url 'all_course' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> All Course</a>
     </div>
     <div class="row">
-        
         {% for course in courses %}
-    {% if course.semister == t_semister %}
-    {% if course.department == request.user.department and course.semister == request.user.semister %}
-        {% if course.course_type == "Mandatory" %}
+        {% if course.semister == t_semister %}
+        {% for department in course.department.all %}
+            {% if department.id == request.user.department.id %}
+                {% if course.course_type == "Mandatory" %}
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
+                    {% if page_user.is_superuser %}
+                    <a class="d-flex justify-content-end" style="margin: 5px;padding: 5px;border-radius: 5px;" href="{% url 'edit_course' course_id=course.id %}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAq0lEQVR4nO2UzQnDMAyFNYbkvUoO6QLZIZDu0zGkDTJIe5cgRQ6Om0BOUQ8FPzD4B74nPywDNAGAMY7K9DZJXXggyvQwocWHCpkJ3sPhKqTG9NzmETfRr8pNcPC9aoKvQDgtxjS7yVq9r3G8DNcMw2GFVzM/D4KnnHM2CYabCfUZznjbYhGcGrxvsfz5a3HVjixNlLoCv9RER4Pwyot2H1j9KSeI0k/hTXCiDx55YKUHMYo+AAAAAElFTkSuQmCC">Edit</a>
+                    {% endif %}
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 <small>[{{course.course_type}}]</small></div>
-                            <div class="h6 mb-0 font-weight-bold text-gray-800">{{course.name}} </div>
+                            <div class="h6 mb-0 font-weight-bold text-gray-800"><a href="{% url 'course_detail' course_id=course.id %}">{{course.name}}</a></div>
                             {% if course|has_liked_course:request.user %}
                                 <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                                     {% csrf_token %}
                                     <button style="background: none; border: none; padding: 0px;" type="submit">
-                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">{{likes.count}}
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">
+                                        {% with like_count=course.courselike_set.count %}
+                                                        {{ like_count }}
+                                                    {% endwith %} 
                                     </button>
                                 </form>
                             
@@ -36,7 +42,10 @@
                             <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                                 {% csrf_token %}
                                 <button style="background: none; border: none; padding: 0px;" type="submit">
-                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">{{likes.count}}
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">
+                                    {% with like_count=course.courselike_set.count %}
+                                                        {{ like_count }}
+                                    {% endwith %} 
                                 </button>
                             </form>
                             {% endif %}
@@ -46,7 +55,7 @@
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACpklEQVR4nO2WzYvTQBjGI/gFevCgXvTuzX/Bq7CJopOyHhbqqQdpRt31YIJa/LgIXkTEj4Mn0YPgwUPCil4EdSs005XSyWYGj6LsZbetoMLuyJs2UmzaTUqyzeI88EBJJsPzm3ln3iqKlJSUlJTU/yYxf+qgcLRbwtGIsLVOYEd1ha3dhHdKniWcEwXhqC3haCLaakvYU7qS2/C2tj48fM8wJm8QIiibUSs/4FVhHz+g5EWiW/Nxw/d2Qr2h5EXC1uqJARzVHTaf7/u7XMqxS/mC6/FOYMoXapQZ8C4DALU9BkArai6ytHSIUFYnHhdRdiknMCZdgGT1//cc/DsPrO6o8KQPItWdCO78FEoIymaj8CR0k5XTA4AmlXwHrg8CsGpsAI9/nNw1aqsr4pW6fwDA4+24AK7H26kBBBD2lB67kTna6ag5kgAQygfOUDoQ0KRGrfyQ8BMtoX5Bh4UmJWytFlyvgbUa1HxU2fQL7vmJHOK01GtgJM412mg0dip5FDSpURBuFo0sbcHqkiYrQ53Dwe4d7g/wLLOVL5yr7C0Ypo6w+Qhhs4oMcxkZ5q+el4Nn2HoIY2bm5vYoedHJ85V9yLDuIGyu6tgScYywtQLfwLcTDV8oW2d1bH6PG3wAxLC+IXy5uOnBj1Uq23XDfDBu8AiQJ6VSaQfMvej7h+semyWUvSEe++pS/hMMv7vP/IswZuzwxWJlNzKs12mFD31m9tq76ufmC5eytY2vUbZGKHs+Dsg2hM2naYcPffXuYwgnEvwf6tQ9Nh07PcKmlVX40PefvYwNQLq7sQ4lFyf8UYSt31kDTF+4Iubff0oMQTx/ZjRABnU/zJdu30sE0DX7sUi/HBkKsFnhQ5PEAMFOvN3SAMTjQgLoed0BKSkpKSkpZYvpDy3uGSxsk+05AAAAAElFTkSuQmCC">
                             {% with matching_group=groups|first_matching_group:course %}
                             {% if matching_group %}
-                                <div><small><a id="link" href="{% url 'group_page' group_id=matching_group.id %}">Join course Group</a></small></div>
+                                <div><small><a id="link" href="{% url 'group_page' group_id=matching_group.id %}">Go To Group</a></small></div>
                             {% else %}
                                 <div><small><a id="link" href="{% url 'create_group' course_id=course.id %}">Create Group</a></small></div>
                             {% endif %}
@@ -60,16 +69,22 @@
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
+                                    {% if page_user.is_superuser %}
+                                    <a class="d-flex justify-content-end" style="margin: 5px;padding: 5px;border-radius: 5px;" href="{% url 'edit_course' course_id=course.id %}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAq0lEQVR4nO2UzQnDMAyFNYbkvUoO6QLZIZDu0zGkDTJIe5cgRQ6Om0BOUQ8FPzD4B74nPywDNAGAMY7K9DZJXXggyvQwocWHCpkJ3sPhKqTG9NzmETfRr8pNcPC9aoKvQDgtxjS7yVq9r3G8DNcMw2GFVzM/D4KnnHM2CYabCfUZznjbYhGcGrxvsfz5a3HVjixNlLoCv9RER4Pwyot2H1j9KSeI0k/hTXCiDx55YKUHMYo+AAAAAElFTkSuQmCC">Edit</a>
+                                    {% endif %}
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 <small>[{{course.course_type}}]</small></div>
-                                            <div class="h6 mb-0 font-weight-bold text-gray-800">{{course.name}} </div>
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800"><a href="{% url 'course_detail' course_id=course.id %}">{{course.name}}</a> </div>
                                             {% if course|has_liked_course:request.user %}
                                                 <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                                                     {% csrf_token %}
                                                     <button style="background: none; border: none; padding: 0px;" type="submit">
-                                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">{{likes.count}}
+                                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABMElEQVR4nO1UTUvDQBTcs+I/EPxAL+LF3yAoQmkzs+ytV/1DhVZB8S/1InhSpHqXFk3eCxhZv0k2aYN704EHSzI78+ZlN8b8oy1S5zYUOFNyImSuwL0C56lzW5+cjNxW4MK/e+O8c0/93kbxnDwUYKZkUS4BVJLkWMkTvw5yyGlu7UFt53Xi+i3w4msOZ/pMrlUMPsZSxCghR1UDchLLQIG7ioEAEjFBFkpwGzHBTSjBMFoCYFg9Rb3euo8WQVxTcjN4VAUYRDAYmDoU/f6yAle/mP110e2umCZkzu3Mu3Aa7nzm95pFkFu7L0DaQlzyJDlaSPwrCZnU/XPKH9VzW4mXkjw2jaV152UIsOuvfsDgQazdMzHwBKwqOf4hPvbPTEwUnc6SApe+/DqquPnTeAVeMrhCeS/ThAAAAABJRU5ErkJggg==">
+                                                        {% with like_count=course.courselike_set.count %}
+                                                            {{ like_count }}
+                                                        {% endwith %} 
                                                     </button>
                                                 </form>
                                             
@@ -77,7 +92,10 @@
                                             <form method="POST" action="{% url 'like_course' course_id=course.id %}">
                                                 {% csrf_token %}
                                                 <button style="background: none; border: none; padding: 0px;" type="submit">
-                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">{{likes.count}}
+                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABV0lEQVR4nO2UTUoDQRCFv7V4BEEnKMpE9BARRYKaS+jSjXgSQRPwB/92utOlrjxARLISFIkHEGehJmCk4A002jNxJrPMg4Km69V7NUVPwRA5EAANoA10gVdgH5h0OFPAgXJdceuqTcUSEAE9T3SAdWBDZx/nHVhM6zwWvwHWgBCoAle6/1bY+Vq5UNxbx2TcZ9BwxANPbGkcFtsJnNhkz2fQVnI1oTgANhVJ+Zo0XnwGX0qWUwSCPlGWxqfP4FnJ6gAGK9J48hnsKnk8gMGpNEzrDyb0aR09taziCxqz1ZeSnuqOOrgHpjOIzwAPqjWNRIwCLREv1Ek/ceNcqqYljVSEzg930sek5Mw9Uu2/UAE+VHiYYlAXx2a/TEbUnJ1zpmUXC9v53NlRxs2FCvAmoTtgHph1VkKUp/PfmHPWyKOipzvLFYIxoOms5abuCsUIcKSw8xAUgh9f9X3gZXkaQQAAAABJRU5ErkJggg==">
+                                                    {% with like_count=course.courselike_set.count %}
+                                                        {{ like_count }}
+                                                    {% endwith %} 
                                                 </button>
                                             </form>
                                             {% endif %}
@@ -87,7 +105,7 @@
                                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACpklEQVR4nO2WzYvTQBjGI/gFevCgXvTuzX/Bq7CJopOyHhbqqQdpRt31YIJa/LgIXkTEj4Mn0YPgwUPCil4EdSs005XSyWYGj6LsZbetoMLuyJs2UmzaTUqyzeI88EBJJsPzm3ln3iqKlJSUlJTU/yYxf+qgcLRbwtGIsLVOYEd1ha3dhHdKniWcEwXhqC3haCLaakvYU7qS2/C2tj48fM8wJm8QIiibUSs/4FVhHz+g5EWiW/Nxw/d2Qr2h5EXC1uqJARzVHTaf7/u7XMqxS/mC6/FOYMoXapQZ8C4DALU9BkArai6ytHSIUFYnHhdRdiknMCZdgGT1//cc/DsPrO6o8KQPItWdCO78FEoIymaj8CR0k5XTA4AmlXwHrg8CsGpsAI9/nNw1aqsr4pW6fwDA4+24AK7H26kBBBD2lB67kTna6ag5kgAQygfOUDoQ0KRGrfyQ8BMtoX5Bh4UmJWytFlyvgbUa1HxU2fQL7vmJHOK01GtgJM412mg0dip5FDSpURBuFo0sbcHqkiYrQ53Dwe4d7g/wLLOVL5yr7C0Ypo6w+Qhhs4oMcxkZ5q+el4Nn2HoIY2bm5vYoedHJ85V9yLDuIGyu6tgScYywtQLfwLcTDV8oW2d1bH6PG3wAxLC+IXy5uOnBj1Uq23XDfDBu8AiQJ6VSaQfMvej7h+semyWUvSEe++pS/hMMv7vP/IswZuzwxWJlNzKs12mFD31m9tq76ufmC5eytY2vUbZGKHs+Dsg2hM2naYcPffXuYwgnEvwf6tQ9Nh07PcKmlVX40PefvYwNQLq7sQ4lFyf8UYSt31kDTF+4Iubff0oMQTx/ZjRABnU/zJdu30sE0DX7sUi/HBkKsFnhQ5PEAMFOvN3SAMTjQgLoed0BKSkpKSkpZYvpDy3uGSxsk+05AAAAAElFTkSuQmCC">
                                             {% with matching_group=groups|first_matching_group:course %}
                                             {% if matching_group %}
-                                                <div><small><a id="link" href="{% url 'group_page' group_id=matching_group.id %}">Join course Group</a></small></div>
+                                                <div><small><a id="link" href="{% url 'group_page' group_id=matching_group.id %}">Go To Group</a></small></div>
                                             {% else %}
                                                 <div><small><a id="link" href="{% url 'create_group' course_id=course.id %}">Create Group</a></small></div>
                                             {% endif %}
@@ -97,10 +115,11 @@
                                 </div>
                             </div>
                         </div>          
-        {% endif %}
-    {% endif %}
-    {% endif %}
-    {% endfor %}
+                        {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% endfor %}
     </div>
 </div>
 </div>

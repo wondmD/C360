@@ -1,0 +1,326 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>CURRICULUM360</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Variables CSS Files. Uncomment your preferred color scheme -->
+  <link href="{% static 'assets/css/variables.css' %}" rel="stylesheet">
+  
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top" data-scrollto-offset="0">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>CURRICULUM360<span>.</span></h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="{% url 'home' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'resource' %}">Resource</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'about' %}">About</a></li>
+          <li class="d-block d-lg-none">
+            {% if page_user %}
+            <div class="nav-item dropdown no-arrow d-none d-md-block nav-link scrollto">
+              <a class="nav-link scrollto dropdown-toggle" href="#" id="userDropdown" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  
+                  {% if page_user.profile_pic %}
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{page_user.username}}</span>
+                  <img style="width: 30px; height: 30px;" class="img-profile rounded-circle"
+                      src="{{page_user.profile_pic.url}}">
+                  {% else %}
+                  <img style="width: 30px; height: 30px;" class="img-profile rounded-circle"
+                      src="{% static 'images/avatar.png' %}">
+                  {% endif %}
+                  {% else %}
+                  <div><a class="nav-link scrollto" href="{% url 'login' %}">Login</a></div>
+                        
+              </a>
+              {% endif %}
+              <!-- Dropdown - User Information -->
+              {% if page_user %}
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                  aria-labelledby="userDropdown">
+                  
+                  <a class="dropdown-item" href="{% url 'user_profile' id=page_user.id %}">
+                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Profile
+                  
+                  </a>
+                  
+                  
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}" data-toggle="modal" data-target="#logoutModal">
+                      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Logout
+                  </a>
+              </div>
+            </div>
+              {% endif %}
+            
+          </li>
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle d-none"></i>
+      </nav><!-- .navbar -->
+      {% if page_user %}
+      <div class="nav-item dropdown no-arrow d-none d-md-block">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            
+            {% if page_user.profile_pic %}
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{page_user.username}}</span>
+            <img style="width: 30px; height: 30px;" class="img-profile rounded-circle"
+                src="{{page_user.profile_pic.url}}">
+            {% else %}
+            <img style="width: 30px; height: 30px;" class="img-profile rounded-circle"
+                src="{% static 'images/avatar.png' %}">
+            {% endif %}
+            {% else %}
+            <div class="d-none d-md-block"><a class="tn-get-started scrollto" href="{% url 'login' %}">Login</a></div>
+                               
+        </a>
+        {% endif %}
+        <!-- Dropdown - User Information -->
+        {% if page_user %}
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in "
+            aria-labelledby="userDropdown">
+            
+            <a class="dropdown-item" href="{% url 'user_profile' id=page_user.id %}">
+                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                Profile
+            
+            </a>
+            
+            
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'logout' %}" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                Logout
+            </a>
+        </div>
+        {% endif %}
+      </div>
+     
+
+    </div>
+  </header><!-- End Header -->
+
+  <section id="hero-animated" class="hero-animated d-flex align-items-center">
+    <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
+      <img src="{% static 'assets/img/hero-carousel/hero-carousel-3.svg' %}" class="img-fluid animated">
+      <h2>Welcome to <span class="btn-primary">CURRICULUM360</span></h2>
+      <p>A place to find digital resource for all ASTU students.</p>
+      <div class="d-flex">
+        <a href="{% url 'register' %}" class="btn-get-started scrollto">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+  
+
+
+    
+
+   
+
+
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+      <div class="container" data-aos="fade-up">
+
+        <ul class="nav nav-tabs row gy-4 d-flex">
+
+          <li class="nav-item col-6 col-md-4 col-lg-2">
+            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
+              <i class="bi bi-book color-cyan"></i>
+              <h4>Books</h4>
+            </a>
+          </li><!-- End Tab 1 Nav -->
+
+          <li class="nav-item col-6 col-md-4 col-lg-2">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
+              <i class="bi bi-people color-indigo"></i>
+              <h4>Groups</h4>
+            </a>
+          </li><!-- End Tab 2 Nav -->
+
+          <li class="nav-item col-6 col-md-4 col-lg-2">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
+              <i class="bi bi-info-circle color-teal"></i>
+              <h4>Information</h4>
+            </a>
+          </li><!-- End Tab 3 Nav -->
+
+        </ul>
+
+        <div class="tab-content">
+
+          <div class="tab-pane active show" id="tab-1">
+            <div class="row gy-4">
+              <div class="col-lg-8 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                <h3>Books</h3>
+                <p class="">
+                  Access a wide range of downloadable electronic books and digital publications through our web application. Our digital book resource provides a collection of educational materials or literary works that can be downloaded and accessed offline. Simply browse and select the books you're interested in, and download them to your device for convenient reading. Whether you're studying on the go or prefer offline access, our downloadable books offer flexibility and convenience.
+                </p>
+                
+              </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/img/features-1.svg" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content 1 -->
+
+          <div class="tab-pane" id="tab-2">
+            <div class="row gy-4">
+              <div class="col-lg-8 order-2 order-lg-1">
+                <h3>Discussion Groups</h3>
+                <p>
+                  Engage in course-related discussions through our dedicated discussion groups. Each course has its own dynamic space where you can connect with fellow students, ask questions, and share insights. Participate in meaningful conversations, seek clarification on course topics, and collaborate with your peers to deepen your understanding. Our discussion groups foster a vibrant learning community, promoting active engagement and knowledge sharing. Join the conversation and connect with like-minded individuals on your educational journey.
+                </p>
+   
+              </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-2.svg" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content 2 -->
+
+          <div class="tab-pane" id="tab-3">
+            <div class="row gy-4">
+              <div class="col-lg-8 order-2 order-lg-1">
+                <h3>Course Information</h3>
+                <p>
+                  Get all the essential details and resources you need for your courses in one place. Our comprehensive course information section offers easy access to course syllabi, learning objectives, required materials, and additional resources. Stay organized and informed about the structure, expectations, and learning outcomes of each course. With all the necessary information readily available, you can confidently navigate your educational path and make the most of your learning experience.
+                </p>
+                
+                
+              </div>
+              <div class="col-lg-4 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-3.svg" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content 3 -->
+
+        </div>
+
+      </div>
+    </section><!-- End Features Section -->
+
+   
+
+    
+
+   
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-legal text-center">
+      <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+        <div class="d-flex flex-column align-items-center align-items-lg-start">
+          <div class="copyright">
+            &copy; Copyright <strong><span>CURRICULUM360</span></strong>. All Rights Reserved
+          </div>
+        </div>
+
+        <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+          <a href="" class="github"><i class="bi bi-github"></i></a>
+          <a href="" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+          </div>
+      </div>
+  </div>
+</div>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script src="{% static 'resource/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'resource/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'resource/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'resource/js/sb-admin-2.min.js' %}"></script>
+  <script src="{% static 'resource/js/scrol.js' %}"></script>
+
+  <!-- Page level plugins -->
+  <script src="{% static 'resource/vendor/chart.js/Chart.min.js' %}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{% static 'resource/js/demo/chart-area-demo.js' %}"></script>
+  <script src="{% static 'resource/js/demo/chart-pie-demo.js' %}"></script>
+
+</body>
+
+</html>
