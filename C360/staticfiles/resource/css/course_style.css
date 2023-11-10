@@ -1,0 +1,93 @@
+/* styles.css */
+body{
+    color: #333;
+    background-color: #fff;
+    
+}
+/* Container styles */
+.course-container-d {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+/* Course name styles */
+.course-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 24px;
+}
+
+/* Course description styles */
+.course-description {
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Course type styles */
+.course-type {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+/* Course rating styles */
+.course-rating {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #090;
+}
+
+/* Resource section styles */
+.resource-section {
+    margin-top: 20px;
+}
+
+/* Resource list styles */
+.resource-section ul {
+    list-style-type: none;
+    padding: 10px;
+    background-color: #ccc;
+    width:  50%;
+    border-radius: 20px;
+}
+
+/* Resource link styles */
+.resource-section ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: larger;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+/* Download icon styles */
+.resource-section ul li a i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #000;
+}
+
+/* Resource link on hover styles */
+.resource-section ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .course-container {
+        padding: 10px;
+    }
+    .resource-section ul{
+        width: 100%;
+    }
+
+    .course-name {
+        font-size: 20px;
+    }
+}

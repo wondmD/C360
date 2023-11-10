@@ -146,9 +146,11 @@
       <img src="{% static 'assets/img/hero-carousel/hero-carousel-3.svg' %}" class="img-fluid animated">
       <h2>Welcome to <span class="btn-primary">CURRICULUM360</span></h2>
       <p>A place to find digital resource for all ASTU students.</p>
+      {% if not page_user %}
       <div class="d-flex">
         <a href="{% url 'register' %}" class="btn-get-started scrollto">Get Started</a>
       </div>
+      {% endif %}
     </div>
   </section>
 

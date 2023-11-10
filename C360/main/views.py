@@ -28,7 +28,7 @@ def edit_user(request, user_id):
             fs = FileSystemStorage()
             filename = fs.save(profile_pic.name, profile_pic)
             user.profile_pic = filename
-            user.save()
+            user.save() 
             return redirect('resource')
     else:
         form = EditUserForm(instance=user)

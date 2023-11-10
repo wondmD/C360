@@ -141,12 +141,12 @@ def add_edit_resource(request, resource_id=None):
         instance = resource.objects.get(id=resource_id)
     else:
         instance = None
-    
-    if request.method == 'POST':
-        form = ResourceForm(request.POST, instance=instance)
+    if request.method == 'POST':       
+        form = ResourceForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
-            return render(request, 'resource/course.html') # Replace 'course_list' with the actual URL name for the course list view
+            print(form.cleaned_data)
+            return redirect('resource')
     else:
         form = ResourceForm(instance=instance)
     

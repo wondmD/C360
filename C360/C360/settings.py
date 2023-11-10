@@ -42,16 +42,30 @@ INSTALLED_APPS = [
     'curriculum',
     'rest_framework',
     'groupapp',
+    'crispy_forms',
+    'django.contrib.sites',
+    'bootstrap4',
+
+    
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+  
+    
+    
     
     
 ]
 JAZZMIN_SETTINGS = {
     "site_title": "C360",
     "site_brand": "Curriculum360",
-    "site_logo": "images/logo1.png",
+    "site_logo": "images/logo.svg",
     
 }
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,9 +74,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'C360.urls'
+
+LOGIN_REDIRECT_URL = '/resource/'
 
 TEMPLATES = [
     {
@@ -77,6 +94,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
             'libraries': {
                 'custom_filters': 'resource.custom_filters',
@@ -142,10 +160,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-\
+MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -155,4 +173,6 @@ AUTH_USER_MODEL = 'main.myusers'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'main.backends.MyUserBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]

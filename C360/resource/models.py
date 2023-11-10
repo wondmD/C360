@@ -44,7 +44,7 @@ class CourseLike(models.Model):
 class resource(models.Model):
     name = models.CharField("Name", max_length=200)
     course = models.ForeignKey(course, on_delete=models.CASCADE, null=True)
-    file = models.FileField(upload_to="resource/static/resource")
+    file = models.FileField(upload_to="uploaded_resource")
     description = models.TextField()
     def __str__(self):
         return self.name

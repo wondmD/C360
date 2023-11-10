@@ -2,33 +2,39 @@
 {% block content %}
 <div class="container-fluid">
     <!-- resource/add_edit_course.html -->
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% if form.instance.pk %}
-      <h2>Edit Edit Resource</h2>
-    {% else %}
-      <h2>Add Resource</h2>
-    {% endif %}
+    <form id="resource_form" method="post" enctype="multipart/form-data" novalidate="">
+        {% csrf_token %}
+        
 
-    <div class="form-group">
-      <label for="id_semister">Name:</label>
-      {{ form.name }}
-    </div>
-    <div class="form-group">
-      <label for="id_description">Course:</label>
-      {{ form.course }}
-    </div>
-    <div class="form-group">
-      <label for="id_course_level">File:</label>
-      {{ form.file }}
-    </div>
-    <div class="form-group">
-      <label for="id_department">Description:</label>
-      {{ form.description }}
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
+        {% if form.instance.pk %}
+            <h2>Edit Resource</h2>
+        {% else %}
+            <h2>Add Resource</h2>
+        {% endif %}
+
+        {% for field in form %}
+        <div class="form-group">
+          <label for="id_name">{{field.label}}:</label>
+          {{ field }}
+        </div>
+        {% if form.errors %}
+        {% if field.errors %}
+        <div class="alert alert-danger">
+            <strong>Error:</strong> Please correct the following errors on <strong>{{field.label}}</strong>.
+            <ul>
+                
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                
+            </ul>
+        </div>
+        {% endif %}
+      {% endif %}
+        {% endfor %}
+
+        
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
 </div>
-
 {% endblock content %}

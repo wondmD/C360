@@ -1,0 +1,160 @@
+body{
+    margin: 0px;
+    font-family: Inria Sans;
+    background-color: #050D12;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    
+}
+.semister-head{
+    width: 100%;
+    color: #FFF;
+}
+#eng{
+    color: #FFF;
+    font-family: Inria Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+    margin-right: 3px;
+}
+#app{
+    color: rgba(255, 255, 255, 0.50);
+    font-family: Inria Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+.fresh-con{
+    width : 96%;
+    margin: 2%;
+    background-color:#183D3D;
+    
+    border-radius: 30px;
+    
+}
+h2{
+    color: #FFF;
+}
+.cources-con{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+@media (max-width:1100px){
+    .cources-con{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:800px){
+    .cources-con{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+.course-con{
+    background-color: #5C8374;
+    width: 80%;
+    border-radius: 20px;
+    flex-shrink: 0;
+    margin: 20px;
+    height: 6rem;
+
+}
+#fresh-head{
+    color: #93B1A6;
+    font-family: Inria Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 0px;
+}
+
+.c-name{
+    color: #FFF;
+    font-family: Inria Sans;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.c-r-no{
+    color: #FFF;
+    font-family: Inria Sans;
+    font-size: 0.8rem;
+    font-weight:300;
+    margin-left: 10px;
+}
+.l-n-c{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 3%;
+    height:40px;
+}
+small{
+    font-size: 1rem;
+    color: white;
+    font-weight: 300;
+    
+}
+#icons{
+    height: 24px;
+    width: 24px;
+}
+.l-n-c-l, .l-n-c-c{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+#myDropdown{
+    width: 200px;
+    height: 60px;
+    background: transparent;
+    border-radius: 10px;
+    margin-left: 20px;
+    color: white;
+    font-family: Inria Sans;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+option{
+    color: #000;
+    font-family: Inria Sans;
+}
+.flash-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: bold;
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+    background-color: #28a745;
+}
+
+.success {
+    background-color: #28a745;
+}
+
+.error {
+    background-color: #dc3545;
+}

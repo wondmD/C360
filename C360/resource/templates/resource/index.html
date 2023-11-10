@@ -255,6 +255,9 @@
 
                     <!-- Content Row -->
                     <div class="row">
+{% if request.user.semister == none %}
+<h4>Welcome {{request.user}} please edit your profile to get your customized Resource <a href="{% url 'user_profile' id=request.user.id %}">Go_to_profile</a></h4>
+{% endif %}
                         
 {% for semister in semisters %}
 

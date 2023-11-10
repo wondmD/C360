@@ -6,8 +6,6 @@ class CourseForm(forms.ModelForm):
         model = course
         fields = '__all__'  
 class ResourceForm(forms.ModelForm):
-
     class Meta:
         model = resource
-        fields = '__all__'
-        
+        fields = '__all__' 

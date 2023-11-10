@@ -30,18 +30,22 @@
             <div class="course-resource-count">Resources : {{ target_course.resource_count }}</div>
             <div class="resource-section">
                 <h3>Resources</h3>
-                {% if request.user.is_superuser %}
-                
-                <h4><a href="{% url 'add_resource' %}">Add Resource</a></h4>
+                <div style="margin: 10px;" class="container-fluid">
+                    {% if request.user.is_superuser %}
+                        <a href="{% url 'add_resource' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA10lEQVR4nK1TSw4BURCsDe7icxxXoJs4CiEz4Q62+rHwOYEdDmJYkpEeY/7PZ6KSTnpT9bq66wFZmH4LhicQOkLoGpb2YyyoCSuWgxqEpzB0h2HfUjcIu5i3q3myod0bYrqEt2kRodnX5FjESXimwrFfsNpZ9RoIFmZ55YOAD0MjQPhUXoAP6v9SRLIhI+CpBa+0gND5LxbGpQWEhgjiqScpc8Zltx4Gid2fg6Tnj6CxFNr8QF5j36mk/0Mgwo7NTjS2vpwjJ6Hx1ITphjUjz5xoP4w9x3gAfIr1SBVjav4AAAAASUVORK5CYII="> Add Resource</a>
                 {% endif %}
+                </div>
                 <ul>
                 {% for resource in resources %}
                 
                 {% if resource.course == target_course %}
                      <li>
-                        {% if request.user.is_superuser %}
-                        <h4><a href="{% url 'edit_resource' resource_id=resource.id %}">Edit Resource</a></h4>
+                        
+                        <div style="margin: 10px;" class="container-fluid">
+                            {% if request.user.is_superuser %}
+                                <a href="{% url 'edit_resource' resource_id=resource.id %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA6klEQVR4nO2VsQrCMBCGfYr2ThzFzc3BWdDF1dGX6OSomz6Xd+0L9AF8AsVJsBeopFCJLbUOSaDYD25pQj/+y6UdDHq6jGKIhOGmCNOMYeZFKoQHxZiXJYT3jIK5V+mHnB0mbxIXRZg6E3+TC8HVukhXuxwiq9J3IoaTuaYId4Z070RqDFEtefWZsyGqJvczuexILj9IvZyp6qW2kP9pL+Oq+J+2XRubH4cSxbD1LtUI4dK7VJOfhxNv0mcSTM0X58loLHG4kBg2QvBw116GY1MqicO1E6lGCC9ezrGKYiAt18l122sberrIC/E1CcBEkD9eAAAAAElFTkSuQmCC"> Edit Resource</a>
                         {% endif %}
+                        </div>
                         <ul>
                         <a href="{{ resource.file.url }}" target="_blank">
                             <img src="{% static 'resource/images/download.png' %}" alt="">
