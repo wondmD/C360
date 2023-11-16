@@ -145,7 +145,8 @@ def propage(request):
 
 @login_required(login_url='login')
 def add_edit_resource(request, resource_id=None, course_id=None):
-    course = course.objects.get(id=course_id)
+    if course_id != None:
+        t_course = course.objects.get(id=course_id)
     page_user = request.user
     if resource_id:
         instance = resource.objects.get(id=resource_id)
@@ -155,15 +156,18 @@ def add_edit_resource(request, resource_id=None, course_id=None):
         form = ResourceForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             # Assuming your Resource model has a foreign key to Course
-            resource = form.save(commit=False)
-            resource.course = course
-            resource.save()
+            resource_obj = form.save(commit=False)
+            if course_id != None:
+                resource_obj.course = t_course
+            resource_obj.save()
             return redirect('resource')
     else:
         form = ResourceForm(instance=instance)
     
     context = {
         'form': form,
-        'page_user':page_user
+        'page_user':page_user,
     }
+    if course_id != None:
+        context['t_course'] = t_course
     return render(request, 'resource/add_edit_resource.html', context)

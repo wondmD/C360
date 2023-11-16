@@ -9,7 +9,7 @@
         {% if form.instance.pk %}
             <h2>Edit Resource</h2>
         {% else %}
-            <h2>Add Resource</h2>
+            <h2>Add Resource for [{{t_course}}]</h2>
         {% endif %}
 
         {% for field in form %}
