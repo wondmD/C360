@@ -32,7 +32,7 @@
                 <h3>Resources</h3>
                 <div style="margin: 10px;" class="container-fluid">
                     {% if request.user.is_superuser %}
-                        <a href="{% url 'add_resource' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA10lEQVR4nK1TSw4BURCsDe7icxxXoJs4CiEz4Q62+rHwOYEdDmJYkpEeY/7PZ6KSTnpT9bq66wFZmH4LhicQOkLoGpb2YyyoCSuWgxqEpzB0h2HfUjcIu5i3q3myod0bYrqEt2kRodnX5FjESXimwrFfsNpZ9RoIFmZ55YOAD0MjQPhUXoAP6v9SRLIhI+CpBa+0gND5LxbGpQWEhgjiqScpc8Zltx4Gid2fg6Tnj6CxFNr8QF5j36mk/0Mgwo7NTjS2vpwjJ6Hx1ITphjUjz5xoP4w9x3gAfIr1SBVjav4AAAAASUVORK5CYII="> Add Resource</a>
+                        <a href="{% url 'add_resource' course_id=course.id %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA10lEQVR4nK1TSw4BURCsDe7icxxXoJs4CiEz4Q62+rHwOYEdDmJYkpEeY/7PZ6KSTnpT9bq66wFZmH4LhicQOkLoGpb2YyyoCSuWgxqEpzB0h2HfUjcIu5i3q3myod0bYrqEt2kRodnX5FjESXimwrFfsNpZ9RoIFmZ55YOAD0MjQPhUXoAP6v9SRLIhI+CpBa+0gND5LxbGpQWEhgjiqScpc8Zltx4Gid2fg6Tnj6CxFNr8QF5j36mk/0Mgwo7NTjS2vpwjJ6Hx1ITphjUjz5xoP4w9x3gAfIr1SBVjav4AAAAASUVORK5CYII="> Add Resource</a>
                 {% endif %}
                 </div>
                 <ul>

@@ -42,15 +42,17 @@ INSTALLED_APPS = [
     'curriculum',
     'rest_framework',
     'groupapp',
+    'bootstrap4',
     'crispy_forms',
     'django.contrib.sites',
-    'bootstrap4',
+    
 
     
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
   
     
     
@@ -83,9 +85,12 @@ LOGIN_REDIRECT_URL = '/resource/'
 
 TEMPLATES = [
     {
+        'APP_DIRS': True,
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR, 'templates'
+            BASE_DIR, 'templates',
+            os.path.join(BASE_DIR, 'templates', 'accounts'),
+            os.path.join(BASE_DIR, 'path/to/django-bootstrap4/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

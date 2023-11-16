@@ -6,7 +6,7 @@ from crispy_forms.layout import Layout, Submit
 class CreateUserForm(forms.ModelForm):
     class Meta:
         model = myusers
-        fields = ['username', 'email', 'password','department','semister']
+        fields = ['username', 'email', 'password']
 
 class EditUserForm(forms.ModelForm):
     class Meta:

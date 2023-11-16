@@ -11,6 +11,6 @@ urlpatterns =[
     path('myadmin/', views.myadmin, name='myadmin'),
     path('allcourse/', views.all_course, name='all_course'),
     path('pro/', views.propage, name='pro'),
-    path('resourceadd/', views.add_edit_resource, name='add_resource'),
-    path('editresource/<int:resource_id>', views.add_edit_resource, name='edit_resource')
+    path('resourceadd/<int:course_id>', views.add_edit_resource, name='add_resource'),
+    path('editresource/<int:resource_id>/', views.add_edit_resource, name='edit_resource')
 ]

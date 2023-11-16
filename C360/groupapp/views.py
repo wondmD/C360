@@ -57,7 +57,7 @@ def create_group(request, course_id):
             topic=topic,
             name=request.POST.get('name'),
             description=request.POST.get('description'),
-        )
+        ) 
         return redirect('resource')
 
     context = {'page_user':page_user,'form': form, 'topic': topic}

@@ -60,35 +60,26 @@ def logoutuser(request):
     logout(request)
     return redirect('home')
 
-
+from django.shortcuts import redirect
 
 def register_page(request):
-    form = CreateUserForm()
-
     if request.method == 'POST':
-        form = CreateUserForm(request.POST, request.FILES)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            if myusers.objects.filter(email=email).exists():
-                form.add_error('email', 'This email is already registered.')
-                return redirect('register')
-            user = form.save(commit=False)
-            user.password = make_password(form.cleaned_data['password'])
-            user.save()
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        if myusers.objects.filter(email=email).exists():
+            # Handle the case where email is already registered
+            # You can redirect to an error page or return an error message
+            return redirect('email_error')
+        user = myusers.objects.create(username=username, email=email)
+        user.set_password(password)
+        user.save()
+        return redirect('login')
+    return render(request, 'main/register.html')
 
-            # Save the profile picture separately
-            profile_pic = request.FILES.get('profile_pic')
-            if profile_pic:
-                fs = FileSystemStorage()
-                filename = fs.save(profile_pic.name, profile_pic)
-                user.profile_pic = filename
-                user.save()
 
-            return redirect('login')
-
-    context = {'form': form}
-    return render(request, 'main/register.html', context)
-
+def email_error(request):
+    return render(request, 'main/emailerror.html')
 def about(request):
     page_user = request.user
     semisters = semister.objects.all()

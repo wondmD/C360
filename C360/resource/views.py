@@ -8,9 +8,10 @@ from django.contrib import messages
 from groupapp.models import group
 from django.shortcuts import redirect, get_object_or_404
 from .forms import CourseForm, ResourceForm
+from groupapp.forms import GroupForm
 
 
-
+   
 
 
 @login_required(login_url='login')
@@ -102,6 +103,14 @@ def add_edit_course(request, course_id=None):
         form = CourseForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
+            if instance == None:
+                form = GroupForm()
+                topic = course.objects.get(id=course_id)
+                group.objects.create(
+                    host=request.user,
+                    topic=topic,
+                    name=request.POST.get('name'),
+                    ) 
             return redirect('resource')  # Replace 'course_list' with the actual URL name for the course list view
     else:
         form = CourseForm(instance=instance)
@@ -135,7 +144,8 @@ def propage(request):
 
 
 @login_required(login_url='login')
-def add_edit_resource(request, resource_id=None):
+def add_edit_resource(request, resource_id=None, course_id=None):
+    course = course.objects.get(id=course_id)
     page_user = request.user
     if resource_id:
         instance = resource.objects.get(id=resource_id)
@@ -144,8 +154,10 @@ def add_edit_resource(request, resource_id=None):
     if request.method == 'POST':       
         form = ResourceForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
-            form.save()
-            print(form.cleaned_data)
+            # Assuming your Resource model has a foreign key to Course
+            resource = form.save(commit=False)
+            resource.course = course
+            resource.save()
             return redirect('resource')
     else:
         form = ResourceForm(instance=instance)

@@ -22,6 +22,65 @@
     <link rel="stylesheet" href="{% static 'groupapp/css/sty.css' %}">
     <!-- Custom styles for this template-->
     <link href="{% static 'resource/css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/13.4.0/2/twemoji.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/twemoji@13.0.2/dist/twemoji.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/twemoji@13.0.2/dist/twemoji.min.js"></script>
+   <style>
+    .file-popup {
+    display: none;
+    }
+    /* CSS */
+.input-wrapper {
+  position: relative;
+}
+
+#emoji-picker-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 9999;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 10px;
+  display: none; /* Hide the emoji picker by default */
+}
+
+#emoji-picker-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+body {
+            background-color: #88f9fa; /* Set a light background color */
+        }
+
+        
+
+        .myform {
+            max-width: 1000px; /* Adjust the maximum width of the form */
+            width: 100%;
+            padding: 20px;
+            background-color: #ffffff; /* Set a white background color */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff; /* Set a primary color for the heading */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Set a primary color for the button */
+            border: none;
+        }
+   </style>
 
 </head>
 

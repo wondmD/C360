@@ -1,0 +1,62 @@
+
+{% load i18n %}
+{% load allauth %}
+
+
+{% block head_title %}
+    <div class="page-title text-center">
+        {% trans "Sign In" %}
+    </div>
+{% endblock head_title %}
+
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            {% if process == "connect" %}
+              <h1 class="display-4 text-center mb-4">
+                {% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}
+              </h1>
+              <p class="lead text-center">
+                {% blocktrans with provider.name as provider %}You are about to connect a new third-party account from {{ provider }}.{% endblocktrans %}
+              </p>
+            {% else %}
+              <h1 class="display-4 text-center mb-4">
+                {% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}
+              </h1>
+              <p class="lead text-center">
+                {% blocktrans with provider.name as provider %}You are about to sign in using a third-party account from {{ provider }}.{% endblocktrans %}
+              </p>
+            {% endif %}
+
+            {% element form method="post" no_visible_fields=True %}
+              {% slot actions %}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-block">
+                  {% trans "Continue" %}
+                </button>
+              {% endslot %}
+            {% endelement %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
+{% endblock content %}

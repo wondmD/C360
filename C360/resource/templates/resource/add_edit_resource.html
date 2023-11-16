@@ -1,8 +1,8 @@
 {% extends 'resource/index.html' %}
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
     <!-- resource/add_edit_course.html -->
-    <form id="resource_form" method="post" enctype="multipart/form-data" novalidate="">
+    <form class="myform" id="resource_form" method="post" enctype="multipart/form-data" novalidate="" >
         {% csrf_token %}
         
 

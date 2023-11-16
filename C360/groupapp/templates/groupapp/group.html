@@ -49,7 +49,7 @@
                             <p style="border-radius: 10px;" class="small p-2 text-white rounded-10 bg-primary">
                               {% if message.attachment %}
                                 <a id="link" href="{{ message.attachment.url }}" target="_blank">
-                                  <img style="width: 40px; height: 40px;" src="{% static 'images/file2.png' %}" alt=""><p>{{ message.attachment.url }}</p>
+                                  <img style="width: 40px; height: 40px;" src="{% static 'images/file2.png' %}" alt="">
                                 </a>
                                 <br>
                               {% endif %}
@@ -68,7 +68,10 @@
                   {% endfor %}
                 </div>
               </div>
-
+              <div id="file-popup" class="file-popup alert alert-success align-items-center" style="display: none;">
+                <i class="fas fa-file"></i>
+                <span id="file-name"></span>
+              </div>
               <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="card-footer text-muted d-flex justify-content-end align-items-center p-3">
@@ -82,11 +85,14 @@
                                 {% endif %}
                   </div>
                   <div class="col-xl-8 col-md-9 col-7">
-                    <input name="body" type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Type message">
+                    
+                    <div id="emoji-picker-container"></div>
+                    <input name="body" type="text" class="form-control form-control-lg" id="target-input" placeholder="Type message" data-emojiable="true">
                   </div>
+                  
                   <div class="file-input col-xl-1 col-md-1 col-1">
                     <input type="file" id="attachment" name="attachment" class="hidden" style="display: none;"/>
-                    <label for="attachment" class="file-input-label">
+                    <label for="attachment" class="file-input-label btn btn-primary custom-hover">
                       <i class="fas fa-paperclip"></i>
                     </label>
                   </div>
@@ -103,6 +109,51 @@
         </div>
         
       </section>
+      <script>
+        
+
+
+
+        document.getElementById('attachment').addEventListener('change', function() {
+        var fileInput = document.getElementById('attachment');
+        var fileName = fileInput.value.split('\\').pop(); // Get the file name from the file input
+        var filePopup = document.getElementById('file-popup');
+        filePopup.textContent = fileName; // Set the content of the popup to the file name
+        filePopup.style.display = 'block';
+         // Hide the popup after 2 seconds
+      });
+
+      var messageContainer = document.getElementById('message-container');
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+      
+   
+      var targetInput = document.getElementById('target-input');
+      var emojiPicker = new EmojiPicker();
+      var emojiPickerContainer = document.getElementById('emoji-picker-container');
+      var emojiPickerButton = document.getElementById('emoji-picker-button');
+
+      emojiPicker.init({
+        emojiable_selector: '[data-emojiable=true]',
+        assetsPath: 'https://cdn.jsdelivr.net/npm/twemoji@13.0.2/assets/svg/',
+        popupButtonClasses: 'fas fa-smile',
+      });
+
+emojiPicker.listenOn(targetInput);
+
+emojiPickerButton.addEventListener('click', function() {
+  if (emojiPickerContainer.style.display === 'block') {
+    emojiPickerContainer.style.display = 'none'; // Hide the emoji picker
+  } else {
+    emojiPickerContainer.style.display = 'block'; // Show the emoji picker
+  }
+});
+
+targetInput.addEventListener('input', function() {
+  if (targetInput.value.trim() !== '') {
+    emojiPickerContainer.style.display = 'none'; // Hide the emoji picker if input is not empty
+  }
+});
+            </script>
     {% endif %}
   {% endfor %}
   

@@ -1,50 +1,24 @@
 {% extends 'resource/index.html' %}
 {% block content %}
-<div class="container-fluid">
-    <!-- resource/add_edit_course.html -->
-<form method="post">
-    {% csrf_token %}
-    {% if form.instance.pk %}
-      <h2>Edit Course</h2>
-    {% else %}
-      <h2>Add Course</h2>
-    {% endif %}
-    
-    <div class="form-group">
-      <label for="id_name">Name:</label>
-      {{ form.name }}
-    </div>
-    <div class="form-group">
-      <label for="id_semister">Semester:</label>
-      {{ form.semister }}
-    </div>
-    <div class="form-group">
-      <label for="id_description">Description:</label>
-      {{ form.description }}
-    </div>
-  
-    <div class="form-group">
-      <label for="id_department">Department:</label>
-      {{ form.department }}
-    </div>
-    <div class="form-group">
-      <label for="id_prerequest">Prerequisite:</label>
-      {{ form.prerequest }}
-    </div>
-    <div class="form-group">
-      <label for="id_crh">Credit Hours:</label>
-      {{ form.crh }}
-    </div>
-    <div class="form-group">
-      <label for="id_stream">Stream:</label>
-      {{ form.stream }}
-    </div>
-    <div class="form-group">
-      <label for="id_course_type">Course Type:</label>
-      {{ form.course_type }}
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+{% load crispy_forms_tags %}
+
+<div class="container-fluid" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+  <form class="myform" method="post">
+      {% csrf_token %}
+      {% if form.instance.pk %}
+          <h2>Edit Course</h2>
+      {% else %}
+          <h2>Add Course</h2>
+      {% endif %}
+
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 {% endblock content %}
